@@ -1,0 +1,559 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0064)http://www.echip.com.vn/echiproot/weblh/suutam/97/ctip/ctip1.htm -->
+<HTML><HEAD><TITLE>Cau truc IP</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=UTF-8">
+<META content="Le Hoan" name=Author>
+<META content="MSHTML 6.00.2900.2769" name=GENERATOR></HEAD>
+<BODY background="Cau truc IP 1_files/5.gif">
+<H3 align=center><FONT face=Arial size=2><A name=1></A><FONT face=Tahoma 
+color=#0000ff size=4>Phần I - Giới thiệu chung</FONT></FONT></H3>
+<P align=left><FONT face=Arial size=2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+Như chúng ta đã biết Internet là một mạng máy tính toàn cầu , do hàng nghìn mạng 
+máy tính từ khắp mọi nơi nối lại tạo nên. Khác với cách tổ chức theo các cấp: 
+nội hạt, liên tỉnh, quốc tế của một mạng viễn thông như mạng thoại chẳng hạn, 
+mạng Internet tổ chức chỉ có một cấp, các mạng máy tính dù nhỏ, dù to khi nối 
+vào Internet đều bình đẳng với nhau. Do cách tổ chức như vậy nên trên Internet 
+có cấu trúc địa chỉ, cách đánh địa chỉ đặc biệt, trong khi cách đánh địa chỉ đối 
+với mạng viễn thông lại đơn giản hơn nhiều.</FONT></P>
+<P align=left><FONT face=Arial size=2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+Đối với mạng viễn thông như mạng thoại chẳng hạn, khách hàng ở các vùng khác 
+nhau hoàn toàn có thể có cùng số điện thoại, phân biệt với nhau bằng mã vùng, mã 
+tỉnh hay mã quốc tế. Đối với mạng Internet , do cách tổ chức chỉ có một cấp nên 
+mỗi một khách hàng hay một máy chủ ( Host ) hoặc Router đều có một địa chỉ 
+internet duy nhất mà không được phép trùng với bất kỳ ai. Do vậy mà địa chỉ trên 
+Internet thực sự là một tài nguyên.</FONT></P>
+<P align=left><FONT face=Arial size=2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+Hàng chục triệu máy chủ trên hàng trăm nghìn mạng. Để địa chỉ không được trùng 
+nhau cần phải có cấu trúc địa chỉ đặc biệt quản lý thống nhất và một Tổ chức của 
+Internet gọi là Trung tâm thông tin mạng Internet - Network Information Center ( 
+NIC ) chủ trì phân phối, NIC chỉ phân địa chỉ mạng ( Net ID ) còn địa chỉ máy 
+chủ trên mạng đó ( Host ID ) do các Tổ chức quản lý Internet của từng quốc gia 
+một tự phân phối. (Trong thực tế để có thể định tuyến (routing ) trên mạng 
+Internet ngoài địa chỉ IP còn cần đến tên riêng của các máy chủ (Host) - Domain 
+Name ). Các phần tiếp theo chúng ta hãy nghiên cứu cấu trúc đặc biệt của địa chỉ 
+Internet.</FONT></P>
+<H2 align=center><FONT face=Arial color=#0000ff size=2>phần II: Cấu trúc địa chỉ 
+IP </FONT></H2>
+<H3 align=left><FONT face=Arial size=2><A name=2></A><FONT 
+color=#0000ff>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; a/ Thành phần và hình 
+dạng của địa chỉ IP</FONT></FONT></H3>
+<P align=left><FONT face=Arial size=2>&nbsp;&nbsp;&nbsp; Địa chỉ IP đang được sử 
+dụng hiện tại (IPv4) có 32 bit chia thành 4 Octet ( mỗi Octet có 8 bit, tương 
+đương 1 byte ) cách đếm đều từ trái qua phải bít 1 cho đến bít 32, các Octet 
+tách biệt nhau bằng dấu chấm (.), bao gồm có 3 thành phần chính.</FONT></P>
+<P align=left><FONT face=Arial size=2><IMG height=35 
+alt="Ctip1a.gif (1480 bytes)" src="Cau truc IP 1_files/ctip1a.gif" 
+width=349></FONT></P>
+<P align=left><FONT face=Arial size=2>Bit 
+1................................................................................... 
+32 </FONT></P>
+<P align=left><FONT face=Arial size=2>* Bit nhận dạng lớp ( Class bit 
+)</FONT></P>
+<P align=left><FONT face=Arial size=2>* Địa chỉ của mạng ( Net ID )</FONT></P>
+<P align=left><FONT face=Arial size=2>* Địa chỉ của máy chủ ( Host ID ). 
+</FONT></P>
+<P align=left><EM><STRONG><FONT size=2><FONT face=Arial 
+color=#ff0000>&nbsp;&nbsp; Ghi chú:</FONT></FONT></STRONG> <FONT face=Arial 
+color=#ff0000 size=2>Tên là Địa chỉ máy chủ nhưng thực tế không chỉ có máy chủ 
+mà tất cả các máy con (Workstation), các cổng truy nhập v.v..đều cần có địa 
+chỉ.</FONT></EM></P>
+<P align=left><FONT face=Arial size=2>&nbsp;&nbsp;&nbsp; Bit nhận dạng lớp 
+(Class bit) để phân biệt địa chỉ ở lớp nào.</FONT></P>
+<P align=left><FONT face=Arial size=2><FONT color=#0000ff>&nbsp;&nbsp; 
+</FONT>&nbsp;&nbsp; <FONT color=#0000ff>1/ - Địa chỉ Internet biểu hiện ở dạng 
+bit nhị phân: </FONT></FONT></P>
+<P align=left><FONT face=Arial size=2>x y x y x y x y. x y x y x y x y. x y x y 
+x y x y. x y x y x y x y</FONT></P>
+<P align=left><FONT face=Arial size=2>x, y = 0 hoặc 1.</FONT></P>
+<P align=left><FONT face=Arial size=2>&nbsp;&nbsp;&nbsp; Ví dụ: </FONT></P>
+<TABLE border=0>
+  <TBODY>
+  <TR>
+    <TD align=right><STRONG><FONT face=Arial size=2>0</FONT></STRONG></TD>
+    <TD><STRONG><FONT face=Arial size=2>0 1 0 1 1 0 0.</FONT></STRONG></TD>
+    <TD><STRONG><FONT face=Arial size=2>0 1 1 1 1 0 1 1.</FONT></STRONG></TD>
+    <TD><STRONG><FONT face=Arial size=2>0 1 1 0 1 1 1 0.</FONT></STRONG></TD>
+    <TD><STRONG><FONT face=Arial size=2>1 1 1 0 0 0 0 0</FONT></STRONG></TD></TR>
+  <TR>
+    <TD><FONT face=Arial size=2>bit nhận dạng</FONT></TD>
+    <TD>
+      <P align=center><FONT face=Arial size=2>Octet 1</FONT></P></TD>
+    <TD>
+      <P align=center><FONT face=Arial size=2>Octet 2</FONT></P></TD>
+    <TD>
+      <P align=center><FONT face=Arial size=2>Octet 3</FONT></P></TD>
+    <TD>
+      <P align=center><FONT face=Arial size=2>Octet 
+4</FONT></P></TD></TR></TBODY></TABLE>
+<P><FONT face=Arial size=2><FONT color=#0000ff>&nbsp;&nbsp; </FONT>&nbsp;&nbsp; 
+<FONT color=#0000ff>2/ - Địa chỉ Internet biểu hiện ở dạng thập phân: 
+</FONT><FONT color=#000000>xxx.xxx.xxx.xxx</FONT></FONT></P>
+<P align=left><FONT face=Arial size=2>&nbsp;&nbsp;&nbsp; x là số thập phân từ 0 
+đến 9 </FONT></P>
+<P align=left><FONT face=Arial size=2>&nbsp;&nbsp;&nbsp; Ví dụ: 146. 123. 110. 
+224</FONT></P>
+<P align=left><FONT face=Arial size=2>&nbsp;&nbsp;&nbsp; Dạng viết đầy đủ của 
+địa chỉ IP là 3 con số trong từng Octet. Ví dụ: địa chỉ IP thường thấy trên thực 
+tế có thể là 53.143.10.2 nhưng dạng đầy đủ là 053.143.010.002.</FONT></P>
+<H3 align=left><FONT face=Arial size=2><A name=3></A><FONT 
+color=#0000ff>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; b / Các lớp địa chỉ 
+IP</FONT></FONT></H3>
+<P align=left><FONT face=Arial size=2>&nbsp;&nbsp;&nbsp; Địa chỉ IP chia ra 5 
+lớp A,B,C, D, E. Hiện tại đã dùng hết lớp A,B và gần hết lớp C, còn lớp D và E 
+Tổ chức internet đang để dành cho mục đích khác không phân, nên chúng ta chỉ 
+nghiên cứu 3 lớp đầu.</FONT></P>
+<P align=left><FONT face=Arial size=2><IMG height=361 
+src="Cau truc IP 1_files/ctip1b.gif" width=504 
+tppabs="http://home.vnn.vn/education/ip_address/image255.gif"></FONT></P>
+<P align=left><FONT face=Arial size=2><IMG height=60 
+alt="Ctip1c.gif (1619 bytes)" src="Cau truc IP 1_files/ctip1c.gif" width=500> 
+</FONT></P>
+<P align=left><FONT face=Arial size=2><IMG height=68 
+src="Cau truc IP 1_files/ctip1d.gif" width=500 
+tppabs="http://home.vnn.vn/education/ip_address/image257.gif"> </FONT></P>
+<P align=left><FONT face=Arial size=2>&nbsp;&nbsp;&nbsp; Qua cấu trúc các lớp 
+địa chỉ IP chúng ta có nhận xét sau: </FONT></P>
+<P align=left><FONT face=Arial size=2>* Bit nhận dạng là những bit đầu tiên - 
+của lớp A là 0, của lớp B là 10, của lớp C là 110.</FONT></P>
+<P align=left><FONT face=Arial size=2>* Lớp D có 4 bit đầu tiên để nhận dạng là 
+1110, còn lớp E có 5 bít đầu tiên để nhận dạng là 11110.</FONT></P>
+<P align=left><FONT face=Arial size=2>* Địa chỉ lớp A: Địa chỉ mạng ít và địa 
+chỉ máy chủ trên từng mạng nhiều. </FONT></P>
+<P align=left><FONT face=Arial size=2>* Địa chỉ lớp B: Địa chỉ mạng vừa phải và 
+địa chỉ máy chủ trên từng mạng vừa phải.</FONT></P>
+<P align=left><FONT face=Arial size=2>* Địa chỉ lớp C: Địa chỉ mạng nhiều, địa 
+chỉ máy chủ trên từng mạng ít. </FONT></P>
+<TABLE width="100%" border=0>
+  <TBODY>
+  <TR>
+    <TD align=middle width="18%"><EM><FONT face=Arial size=2>Địa chỉ lớp 
+      </FONT></EM></TD>
+    <TD align=left width="35%">
+      <P align=center><EM><FONT face=Arial size=2>Vùng địa chỉ lý 
+      thuyết</FONT></EM></P></TD>
+    <TD align=middle width="22%">
+      <P align=center><EM><FONT face=Arial size=2>Số mạng <BR>tối đa sử 
+      dụng</FONT></EM></P></TD>
+    <TD align=middle width="25%">
+      <P align=center><EM><FONT face=Arial size=2>Số máy chủ tối đa<BR>trên từng 
+      mạng</FONT></EM></P></TD></TR>
+  <TR>
+    <TD align=middle width="18%"><FONT face=Arial size=2>A</FONT></TD>
+    <TD align=left width="35%"><FONT face=Arial size=2>Từ 0.0.0.0 đến 
+      127.0.0.0</FONT></TD>
+    <TD align=middle width="22%"><FONT face=Arial size=2>126</FONT></TD>
+    <TD align=middle width="25%"><FONT face=Arial size=2>16777214</FONT></TD></TR>
+  <TR>
+    <TD align=middle width="18%"><FONT face=Arial size=2>B</FONT></TD>
+    <TD align=left width="35%"><FONT face=Arial size=2>Từ 128.0.0.0 đến 
+      191.255.0.0</FONT></TD>
+    <TD align=middle width="22%"><FONT face=Arial size=2>16382</FONT></TD>
+    <TD align=middle width="25%"><FONT face=Arial size=2>65534</FONT></TD></TR>
+  <TR>
+    <TD align=middle width="18%"><FONT face=Arial size=2>C</FONT></TD>
+    <TD align=left width="35%"><FONT face=Arial size=2>Từ 192.0.0.0 đến 
+      223.255.255.0</FONT></TD>
+    <TD align=middle width="22%"><FONT face=Arial size=2>2097150</FONT></TD>
+    <TD align=middle width="25%"><FONT face=Arial size=2>254</FONT></TD></TR>
+  <TR>
+    <TD align=middle width="18%"><FONT face=Arial size=2>D</FONT></TD>
+    <TD align=left width="35%"><FONT face=Arial size=2>Từ 224.0.0.0 đến 
+      240.0.0.0</FONT></TD>
+    <TD align=middle width="22%"><FONT face=Arial size=2>Không phân</FONT></TD>
+    <TD align=middle width="25%"></TD></TR>
+  <TR>
+    <TD align=middle width="18%"><FONT face=Arial size=2>E </FONT></TD>
+    <TD align=left width="35%"><FONT face=Arial size=2>Từ 241.0.0.0 đến 
+      255.0.0.0</FONT></TD>
+    <TD align=middle width="22%"><FONT face=Arial size=2>Không phân</FONT></TD>
+    <TD align=middle width="25%"></TD></TR></TBODY></TABLE>
+<TABLE width="100%" border=0>
+  <TBODY>
+  <TR>
+    <TD align=middle width="18%"><EM><FONT face=Arial size=2>Địa chỉ lớp 
+      </FONT></EM></TD>
+    <TD align=left width="35%">
+      <P align=center><EM><FONT face=Arial size=2>Vùng địa chỉ sử 
+      dụng</FONT></EM></P></TD>
+    <TD align=middle width="22%"><EM><FONT face=Arial size=2>Bit nhận 
+      dạng</FONT></EM></TD>
+    <TD align=middle width="25%"><EM><FONT face=Arial size=2>Số bit dùng để 
+      <BR>phân cho mạng</FONT></EM></TD></TR>
+  <TR>
+    <TD align=middle width="18%"><FONT face=Arial size=2>A</FONT></TD>
+    <TD align=left width="35%"><FONT face=Arial size=2>Từ 1 đến 127</FONT></TD>
+    <TD align=middle width="22%"><FONT face=Arial size=2>0</FONT></TD>
+    <TD align=middle width="25%"><FONT face=Arial size=2>7</FONT></TD></TR>
+  <TR>
+    <TD align=middle width="18%"><FONT face=Arial size=2>B</FONT></TD>
+    <TD align=left width="35%"><FONT face=Arial size=2>Từ 128.1 đến 
+      191.254</FONT></TD>
+    <TD align=middle width="22%"><FONT face=Arial size=2>10</FONT></TD>
+    <TD align=middle width="25%"><FONT face=Arial size=2>14</FONT></TD></TR>
+  <TR>
+    <TD align=middle width="18%"><FONT face=Arial size=2>C</FONT></TD>
+    <TD align=left width="35%"><FONT face=Arial size=2>Từ 192.0.1 đến 
+      223.255.254</FONT></TD>
+    <TD align=middle width="22%"><FONT face=Arial size=2>110</FONT></TD>
+    <TD align=middle width="25%"><FONT face=Arial size=2>21</FONT></TD></TR>
+  <TR>
+    <TD align=middle width="18%"><FONT face=Arial size=2>D</FONT></TD>
+    <TD align=left width="35%"></TD>
+    <TD align=middle width="22%"><FONT face=Arial size=2>1110</FONT></TD>
+    <TD align=middle width="25%"><FONT face=Arial size=2>---</FONT></TD></TR>
+  <TR>
+    <TD align=middle width="18%"><FONT face=Arial size=2>E</FONT></TD>
+    <TD align=left width="35%"></TD>
+    <TD align=middle width="22%"><FONT face=Arial size=2>11110</FONT></TD>
+    <TD align=middle width="25%"><FONT face=Arial 
+  size=2>---</FONT></TD></TR></TBODY></TABLE>
+<P align=left><FONT face=Arial size=2>&nbsp;&nbsp;&nbsp; Như vậy nếu chúng ta 
+thấy 1 địa chỉ IP có 4 nhóm số cách nhau bằng dấu chấm, nếu thấy nhóm số thứ 
+nhất nhỏ hơn 126 biết địa chỉ này ở lớp A, nằm trong khoảng 128 đến 191 biết địa 
+chỉ này ở lớp B và từ 192 đến 223 biết địa chỉ này ở lớp C.</FONT></P>
+<P align=left><EM><STRONG><FONT size=2><FONT face=Arial 
+color=#ff0000>&nbsp;&nbsp;&nbsp; Ghi nhớ:</FONT></FONT></STRONG> <FONT 
+face=Arial color=#ff0000 size=2>Địa chỉ thực tế không phân trong trường hợp tất 
+cả các bit trong một hay nhiều Octet sử dụng cho địa chỉ mạng hay địa chỉ máy 
+chủ đều bằng 0 hay đều bằng 1. Điều này đúng cho tất cả các lớp địa 
+chỉ.</FONT></EM></P>
+<H3 align=left><FONT size=2><A name=4><FONT face=Arial></FONT></A><FONT 
+face=Arial color=#0000ff>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; i / địa chỉ 
+Lớp A </FONT></FONT></H3>
+<P align=left><FONT face=Arial size=2>&nbsp;&nbsp;&nbsp; Tổng quát chung: 
+</FONT></P>
+<P align=left><FONT face=Arial size=2>&nbsp;&nbsp;&nbsp; Bit thứ nhất là bit 
+nhận dạng lớp A = 0.</FONT></P>
+<P align=left><FONT face=Arial size=2>&nbsp;&nbsp;&nbsp; 7 bit còn lại trong 
+Octet thứ nhất dành cho địa chỉ mạng. </FONT></P>
+<P align=left><FONT face=Arial size=2>&nbsp;&nbsp;&nbsp; 3 Octet còn lại có 24 
+bit dành cho địa chỉ của máy Chủ.</FONT></P><B>
+<P align=left><FONT face=Arial size=2>Class A: ( 0 - 126 )</FONT></P></B>
+<P align=left><FONT face=Arial size=2><IMG height=116 
+src="Cau truc IP 1_files/ctip1e.gif" width=500 
+tppabs="http://home.vnn.vn/education/ip_address/image258.gif"></FONT></P><B>
+<P align=left><FONT face=Arial size=2>- net id: 126 mạng<BR>- host id:16.777.214 
+máy chủ trên một mạng</FONT></P></B>
+<H3 align=left><FONT face=Arial size=2><A name=5></A><FONT 
+color=#ff0000>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; a/ Địa chỉ mạng (Net 
+ID)</FONT></FONT></H3><B>
+<P align=left><FONT face=Arial color=#0000ff 
+size=2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1/ Khả năng phân địa 
+chỉ</FONT></P></B>
+<P align=left><FONT face=Arial size=2>&nbsp;&nbsp;&nbsp; Khi đếm số bit chúng ta 
+đếm từ trái qua phải, nhưng khi tính giá trị thập phân 2<SUP>n </SUP>của bit lại 
+tính từ phải qua trái, bắt đầu từ bit 0. Octet thứ nhất dành cho địa chỉ mạng, 
+bit 7 = 0 là bit nhận dạng lớp A. 7 bit còn lại từ bit 0 đến bit 6 dành cho địa 
+chỉ mạng ( 2 <SUP>7 </SUP>) = 128. Nhưng trên thực tế địa chỉ khi tất cả các bit 
+bằng 0 hoặc bằng 1 đều không phân cho mạng. Khi giá trị các bit đều bằng 0, giá 
+trị thập phân 0 là không có nghĩa, còn địa chỉ là 127 khi các bit đều bằng 1 
+dùng để thông báo nội bộ, nên trên thực tế còn lại 126 mạng.</FONT></P>
+<P align=left><B><FONT face=Arial 
+size=2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+Octet 1</FONT></P>
+<P align=left></B><FONT face=Arial size=2><IMG height=73 
+src="Cau truc IP 1_files/ctip1f.gif" width=238 
+tppabs="http://home.vnn.vn/education/ip_address/image259.gif"></FONT></P><U>
+<P align=left></U><FONT face=Arial size=2>&nbsp;&nbsp;&nbsp; <U>Cách tính địa 
+chỉ mạng lớp A.</U> </FONT></P>
+<P align=left><FONT face=Arial size=2>&nbsp;&nbsp;&nbsp; Số thứ tự Bit (n)- tính 
+từ phải qua trái: 6 5 4 3 2 1 0</FONT></P>
+<P align=left><FONT face=Arial size=2>&nbsp;&nbsp;&nbsp; Giá trị nhị phân (0 hay 
+1) của Bit: x x x x x x x</FONT></P>
+<P align=left><FONT face=Arial size=2>&nbsp;&nbsp;&nbsp; Giá trị thập phân tương 
+ứng khi giá trị bit = 1 sẽ là 2 <SUP>n </SUP></FONT></P>
+<P align=left><FONT face=Arial size=2>&nbsp;&nbsp;&nbsp; Giá trị thập phân tương 
+ứng khi giá trị bit = 0 không tính.</FONT></P>
+<P align=left><FONT face=Arial size=2>&nbsp;&nbsp;&nbsp; Giá trị thập phân lớn 
+nhất khi giá trị của 7 bit đều bằng 1 là 127.</FONT></P>
+<P align=left><FONT face=Arial size=2>&nbsp;&nbsp;&nbsp; Xin xem bảng tính trọn 
+vẹn giá trị của tất cả các Bit</FONT></P><B>
+<P><FONT face=Arial size=2>&nbsp;&nbsp;&nbsp; Như vậy khả năng phân địa chỉ của 
+lớp A cho 126 mạng -</FONT></P></B>
+<P><B><FONT face=Arial size=2><FONT 
+color=#0000ff>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2/ Biểu hiệu địa chỉ 
+trên thực tế: </FONT><FONT color=#000000>Từ 001 đến 126</FONT></FONT></B></P>
+<H3 align=left><FONT face=Arial size=2><A name=6></A><FONT 
+color=#ff0000><STRONG>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; B / Địa chỉ của 
+các máy chủ trên một mạng</STRONG></FONT></FONT></H3>
+<P align=left><B><FONT face=Arial color=#0000ff 
+size=2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1/ Khả năng phân địa 
+chỉ</FONT></P>
+<P align=left></B><FONT face=Arial size=2>&nbsp;&nbsp;&nbsp; Ba Octet sau gồm 24 
+bit được tính từ bit 0 đến bit 23 dành cho địa chỉ máy chủ trên từng mạng. 
+</FONT></P>
+<P align=left><FONT face=Arial size=2><IMG height=109 
+src="Cau truc IP 1_files/ctip1g.gif" width=401 
+tppabs="http://home.vnn.vn/education/ip_address/image260.gif"><BR>&nbsp;&nbsp;&nbsp; 
+Với cách tính như trên, để được tổng số máy chủ trên một mạng ta có.</FONT></P>
+<TABLE width="90%" border=0>
+  <TBODY>
+  <TR>
+    <TD width="52%">
+      <P align=center><EM><FONT face=Arial size=2>Gía trị tương ứng với Bit 
+      n</FONT></EM></P>
+      <P align=left><FONT face=Arial 
+      size=2>23.22.21.20.19.18.16.|15.14.13.12.11.10.9.8.|7.6.5.4.3.2.1.0 
+      </FONT></P></TD>
+    <TD align=middle width="23%"><EM><FONT face=Arial size=2>Giá&nbsp; trị 
+      2n</FONT></EM></TD>
+    <TD align=middle width="25%">
+      <P align=center><EM><FONT face=Arial size=2>Địa chỉ </FONT></EM></P></TD></TR>
+  <TR>
+    <TD width="52%"><FONT face=Arial 
+      size=2>..0...0...0...0...0...0...0.|.0...0...0...0...0...0..0.0.|0.0.0.0.0.0.0.0 
+      </FONT></TD>
+    <TD align=middle width="23%"></TD>
+    <TD align=middle width="25%"><FONT face=Arial size=2>000</FONT></TD></TR>
+  <TR>
+    <TD width="52%"><FONT face=Arial 
+      size=2>..0...0...0...0...0...0...0.|.0...0...0...0...0...0..0.0.|0.0.0.0.0.0.0.0 
+      </FONT></TD>
+    <TD align=middle width="23%"><FONT face=Arial 
+    size=2>2<SUP>0</SUP></FONT></TD>
+    <TD align=middle width="25%"><FONT face=Arial size=2>001</FONT></TD></TR>
+  <TR>
+    <TD width="52%"><FONT face=Arial 
+      size=2>..0...0...0...0...0...0...0.|.0...0...0...0...0...0..0.0.|0.0.0.0.0.0.0.0 
+      </FONT></TD>
+    <TD align=middle width="23%"><FONT face=Arial 
+    size=2>2<SUP>1</SUP></FONT></TD>
+    <TD align=middle width="25%"><FONT face=Arial size=2>002</FONT></TD></TR>
+  <TR>
+    <TD width="52%"><FONT face=Arial 
+      size=2>...................................</FONT></TD>
+    <TD align=middle width="23%"><FONT face=Arial size=2>. . . . . .</FONT></TD>
+    <TD align=middle width="25%"><FONT face=Arial size=2>. . . . . 
+  .</FONT></TD></TR>
+  <TR>
+    <TD width="52%"><FONT face=Arial 
+      size=2>...................................</FONT></TD>
+    <TD align=middle width="23%"><FONT face=Arial size=2>. . . . . .</FONT></TD>
+    <TD align=middle width="25%"><FONT face=Arial size=2>. . . . . 
+  .</FONT></TD></TR>
+  <TR>
+    <TD width="52%"><FONT face=Arial 
+      size=2>..1...1...1...1...1...1...1.|.1...1...1...1...1...1..1.1.|1.1.1.1.1.1.1.0 
+      </FONT></TD>
+    <TD align=middle width="23%"><FONT face=Arial 
+      size=2>2<SUP>23</SUP>+...+2<SUP>1</SUP></FONT></TD>
+    <TD align=middle width="25%"><FONT face=Arial size=2>16777214</FONT></TD></TR>
+  <TR>
+    <TD width="52%"><FONT face=Arial 
+      size=2>..1...1...1...1...1...1...1.|.1...1...1...1...1...1..1.1.|1.1.1.1.1.1.1.1 
+      </FONT></TD>
+    <TD align=middle width="23%"></TD>
+    <TD align=middle width="25%"><FONT face=Arial size=2>16777215</FONT></TD></TR>
+  <TR>
+    <TD width="52%"><FONT face=Arial 
+      size=2>&lt;------Octet2-------&gt;&lt;-------Octet3---------&gt;|&lt;--Octet4----&gt; 
+      </FONT></TD>
+    <TD align=middle width="23%"></TD>
+    <TD align=middle width="25%"></TD></TR></TBODY></TABLE>
+<P align=left><FONT face=Arial size=2>&nbsp;&nbsp;&nbsp; Địa chỉ khi các bit đều 
+bằng 0 hay bằng 1 bỏ ra. Trên thực tế còn lại 224-2 = 16 777 214</FONT></P>
+<P><FONT face=Arial size=2>&nbsp;&nbsp;&nbsp; Như vậy khả năng phân địa chỉ cho 
+16 777 214 máy chủ.</FONT></P><B>
+<P><FONT face=Arial color=#0000ff 
+size=2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2/ Biểu hiện địa chỉ trên thực 
+tế</FONT></P>
+<P align=left><FONT face=Arial size=2>&nbsp;&nbsp;&nbsp; Octet 
+2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Octet 3 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Octet 4</FONT></P></B>
+<P><FONT face=Arial size=2><IMG height=73 src="Cau truc IP 1_files/ctip1h.gif" 
+width=379 
+tppabs="http://home.vnn.vn/education/ip_address/image261.gif"></FONT></P>
+<P align=left><B><FONT face=Arial 
+size=2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+Octet 2</FONT></P>
+<P align=left><FONT face=Arial size=2>&nbsp;&nbsp;&nbsp;&nbsp; <IMG height=63 
+src="Cau truc IP 1_files/ctip1i.gif" width=260 
+tppabs="http://home.vnn.vn/education/ip_address/image262.gif"></FONT></P></B>
+<TABLE width="84%" border=1>
+  <TBODY>
+  <TR>
+    <TD width="33%">
+      <P align=center><EM><FONT face=Arial size=2>Gía trị tương ứng với<BR>thứ 
+      tự bit (n)</FONT></EM></P>
+      <P align=left><FONT face=Arial size=2>76543210</FONT></P></TD>
+    <TD width="38%">
+      <P align=center><FONT face=Arial size=2><BR><EM>Giá trị 
+    2n</EM></FONT></P></TD>
+    <TD width="29%">
+      <P align=center><FONT face=Arial size=2><BR><EM>Địa chỉ máy 
+      chủ</EM></FONT></P></TD></TR>
+  <TR>
+    <TD width="33%"><FONT face=Arial size=2>00000000</FONT></TD>
+    <TD width="38%"><FONT face=Arial size=2>&nbsp;</FONT></TD>
+    <TD width="29%"><FONT face=Arial size=2>000</FONT></TD></TR>
+  <TR>
+    <TD width="33%"><FONT face=Arial size=2>00000001</FONT></TD>
+    <TD width="38%"><FONT face=Arial size=2>2<SUP>0</SUP></FONT></TD>
+    <TD width="29%"><FONT face=Arial size=2>001</FONT></TD></TR>
+  <TR>
+    <TD width="33%"><FONT face=Arial size=2>00000010</FONT></TD>
+    <TD width="38%"><FONT face=Arial size=2>2<SUP>1</SUP></FONT></TD>
+    <TD width="29%"><FONT face=Arial size=2>002</FONT></TD></TR>
+  <TR>
+    <TD width="33%"><FONT face=Arial size=2>00000011</FONT></TD>
+    <TD width="38%"><FONT face=Arial 
+    size=2>2<SUP>1</SUP>+2<SUP>0</SUP></FONT></TD>
+    <TD width="29%"><FONT face=Arial size=2>003</FONT></TD></TR>
+  <TR>
+    <TD width="33%"><FONT face=Arial size=2>................</FONT></TD>
+    <TD width="38%"><FONT face=Arial size=2>...........</FONT></TD>
+    <TD width="29%"><FONT face=Arial size=2>......</FONT></TD></TR>
+  <TR>
+    <TD width="33%"><FONT face=Arial size=2>................</FONT></TD>
+    <TD width="38%"><FONT face=Arial size=2>...........</FONT></TD>
+    <TD width="29%"><FONT face=Arial size=2>......</FONT></TD></TR>
+  <TR>
+    <TD width="33%"><FONT face=Arial size=2>11111111</FONT></TD>
+    <TD width="38%"><FONT face=Arial 
+      size=2>2<SUP>7</SUP>+2<SUP>6</SUP>+2<SUP>5</SUP>+2<SUP>4</SUP>+2<SUP>3</SUP>+2<SUP>2</SUP>+2<SUP>1</SUP>+2<SUP>0</SUP></FONT></TD>
+    <TD width="29%"><FONT face=Arial size=2>255</FONT></TD></TR></TBODY></TABLE>
+<P align=left><B><FONT face=Arial size=2>&nbsp;&nbsp;&nbsp; Như vậy giá trị thập 
+phân ở Octet 2 tính từ 000 tới 255.</FONT></B></P><B>
+<P align=left><FONT face=Arial 
+size=2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+Octet 3</FONT></P>
+<P align=left><FONT face=Arial size=2>&nbsp;&nbsp;&nbsp;&nbsp; <IMG height=63 
+src="Cau truc IP 1_files/ctip1i.gif" width=260 
+tppabs="http://home.vnn.vn/education/ip_address/image262.gif"></FONT></P></B>
+<TABLE width="84%" border=1>
+  <TBODY>
+  <TR>
+    <TD width="33%">
+      <P align=center><EM><FONT face=Arial size=2>Gía trị tương ứng với<BR>thứ 
+      tự bit (n)</FONT></EM></P>
+      <P align=left><FONT face=Arial size=2>76543210</FONT></P></TD>
+    <TD width="38%">
+      <P align=center><FONT face=Arial size=2><BR><EM>Giá trị 
+    2n</EM></FONT></P></TD>
+    <TD width="29%">
+      <P align=center><FONT face=Arial size=2><BR><EM>Địa chỉ máy 
+      chủ</EM></FONT></P></TD></TR>
+  <TR>
+    <TD width="33%"><FONT face=Arial size=2>00000000</FONT></TD>
+    <TD width="38%"><FONT face=Arial size=2>&nbsp;</FONT></TD>
+    <TD width="29%"><FONT face=Arial size=2>000</FONT></TD></TR>
+  <TR>
+    <TD width="33%"><FONT face=Arial size=2>00000001</FONT></TD>
+    <TD width="38%"><FONT face=Arial size=2>2<SUP>0</SUP></FONT></TD>
+    <TD width="29%"><FONT face=Arial size=2>001</FONT></TD></TR>
+  <TR>
+    <TD width="33%"><FONT face=Arial size=2>00000010</FONT></TD>
+    <TD width="38%"><FONT face=Arial size=2>2<SUP>1</SUP></FONT></TD>
+    <TD width="29%"><FONT face=Arial size=2>002</FONT></TD></TR>
+  <TR>
+    <TD width="33%"><FONT face=Arial size=2>00000011</FONT></TD>
+    <TD width="38%"><FONT face=Arial 
+    size=2>2<SUP>1</SUP>+2<SUP>0</SUP></FONT></TD>
+    <TD width="29%"><FONT face=Arial size=2>003</FONT></TD></TR>
+  <TR>
+    <TD width="33%"><FONT face=Arial size=2>................</FONT></TD>
+    <TD width="38%"><FONT face=Arial size=2>...........</FONT></TD>
+    <TD width="29%"><FONT face=Arial size=2>......</FONT></TD></TR>
+  <TR>
+    <TD width="33%"><FONT face=Arial size=2>................</FONT></TD>
+    <TD width="38%"><FONT face=Arial size=2>...........</FONT></TD>
+    <TD width="29%"><FONT face=Arial size=2>......</FONT></TD></TR>
+  <TR>
+    <TD width="33%"><FONT face=Arial size=2>11111111</FONT></TD>
+    <TD width="38%"><FONT face=Arial 
+      size=2>2<SUP>7</SUP>+2<SUP>6</SUP>+2<SUP>5</SUP>+2<SUP>4</SUP>+2<SUP>3</SUP>+2<SUP>2</SUP>+2<SUP>1</SUP>+2<SUP>0</SUP></FONT></TD>
+    <TD width="29%"><FONT face=Arial size=2>255</FONT></TD></TR></TBODY></TABLE><B>
+<P align=left><FONT face=Arial size=2>&nbsp;&nbsp;&nbsp; Như vậy giá trị thập 
+phân ở Octet 3 tính từ 000 tới 255.</FONT></P>
+<P align=left><FONT face=Arial size=2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+&nbsp;&nbsp;&nbsp; &nbsp; Octet 4</FONT></P>
+<P align=left><FONT face=Arial size=2>&nbsp;&nbsp;&nbsp;&nbsp; <IMG height=63 
+src="Cau truc IP 1_files/ctip1i.gif" width=260 
+tppabs="http://home.vnn.vn/education/ip_address/image262.gif"></FONT></P></B>
+<TABLE width="84%" border=1>
+  <TBODY>
+  <TR>
+    <TD width="33%">
+      <P align=center><EM><FONT face=Arial size=2>Gía trị tương ứng với<BR>thứ 
+      tự bit (n)</FONT></EM></P>
+      <P align=left><FONT face=Arial size=2>76543210</FONT></P></TD>
+    <TD width="40%">
+      <P align=center><FONT face=Arial size=2><BR><EM>Giá trị 
+    2n</EM></FONT></P></TD>
+    <TD width="27%">
+      <P align=center><FONT face=Arial size=2><BR><EM>Địa chỉ máy 
+      chủ</EM></FONT></P></TD></TR>
+  <TR>
+    <TD width="33%"><FONT face=Arial size=2>00000000</FONT></TD>
+    <TD width="40%"><FONT face=Arial size=2>&nbsp;</FONT></TD>
+    <TD width="27%"><FONT face=Arial size=2>000 Không phân</FONT></TD></TR>
+  <TR>
+    <TD width="33%"><FONT face=Arial size=2>00000001</FONT></TD>
+    <TD width="40%"><FONT face=Arial size=2>2<SUP>0</SUP></FONT></TD>
+    <TD width="27%"><FONT face=Arial size=2>001</FONT></TD></TR>
+  <TR>
+    <TD width="33%"><FONT face=Arial size=2>00000010</FONT></TD>
+    <TD width="40%"><FONT face=Arial size=2>2<SUP>1</SUP></FONT></TD>
+    <TD width="27%"><FONT face=Arial size=2>002</FONT></TD></TR>
+  <TR>
+    <TD width="33%"><FONT face=Arial size=2>00000011</FONT></TD>
+    <TD width="40%"><FONT face=Arial 
+    size=2>2<SUP>1</SUP>+2<SUP>0</SUP></FONT></TD>
+    <TD width="27%"><FONT face=Arial size=2>003</FONT></TD></TR>
+  <TR>
+    <TD width="33%"><FONT face=Arial size=2>................</FONT></TD>
+    <TD width="40%"><FONT face=Arial size=2>...........</FONT></TD>
+    <TD width="27%"><FONT face=Arial size=2>......</FONT></TD></TR>
+  <TR>
+    <TD width="33%"><FONT face=Arial size=2>................</FONT></TD>
+    <TD width="40%"><FONT face=Arial size=2>...........</FONT></TD>
+    <TD width="27%"><FONT face=Arial size=2>......</FONT></TD></TR>
+  <TR>
+    <TD width="33%"><FONT face=Arial size=2>11111110</FONT></TD>
+    <TD width="40%"><FONT face=Arial 
+      size=2>2<SUP>7</SUP>+2<SUP>6</SUP>+2<SUP>5</SUP>+2<SUP>4</SUP>+2<SUP>3</SUP>+2<SUP>2</SUP>+2<SUP>1</SUP></FONT></TD>
+    <TD width="27%"><FONT face=Arial size=2>254</FONT></TD></TR>
+  <TR>
+    <TD width="33%"><FONT face=Arial size=2>11111111</FONT></TD>
+    <TD width="40%"><FONT face=Arial 
+      size=2>2<SUP>7</SUP>+2<SUP>6</SUP>+2<SUP>5</SUP>+2<SUP>4</SUP>+2<SUP>3</SUP>+2<SUP>2</SUP>+2<SUP>1</SUP>+2<SUP>0</SUP></FONT></TD>
+    <TD width="27%"><FONT face=Arial size=2>255 Không 
+phân</FONT></TD></TR></TBODY></TABLE><B>
+<P align=left><FONT face=Arial size=2>&nbsp;&nbsp;&nbsp; Như vậy giá trị thập 
+phân ở Octet 4 tính từ 001 tới 254.</FONT></P></B>
+<P><FONT face=Arial size=2>&nbsp;&nbsp;&nbsp; Tổng quát lại tại địa chỉ của một 
+mạng, khi lần lượt thay đổi các giá trị của các Octet 2, 3, 4.ta sẽ có 16 777 
+216 khả năng thay đổi mà các con số không trùng lặp nhau ( Combinations ) có 
+nghiã là 16 777 216 địa chỉ của máy chủ trên mạng, nhưng thực tế phân chỉ 
+là</FONT></P>
+<P><B><FONT face=Arial size=2>&nbsp;&nbsp;&nbsp; (256 x 256 x 256) - 2 =16 777 
+214 </FONT></P></B>
+<P><FONT face=Arial size=2>&nbsp;&nbsp;&nbsp; Biểu hiện trên thực tế là ba số 
+thập phân trong 3 Octet cách nhau dấu. </FONT></P><B>
+<P><FONT face=Arial size=2>&nbsp;&nbsp;&nbsp; Từ 000. 000. 0001 đến 255. 255. 
+254 </FONT></P>
+<P></B><EM><STRONG><FONT size=2><FONT face=Arial 
+color=#ff0000>&nbsp;&nbsp;&nbsp; Kết luận:</FONT></FONT></STRONG> <FONT 
+size=2><FONT face=Arial color=#ff0000>Địa chỉ lớp A có thể phân cho 126 mạng và 
+mỗi một mạng có 16 777 214 máy chủ. Nói cách khác địa chỉ thực tế sẽ <B>từ 
+001.000.000.001 đến 126.255.255.254</B></FONT></FONT></EM></P>
+<P><FONT face=Arial size=2>&nbsp;&nbsp;&nbsp; Ví dụ: Một địa chỉ đầy đủ của lớp 
+A: 124. 234. 200. 254. Trong đó: </FONT></P>
+<P align=left><FONT face=Arial size=2>&nbsp;&nbsp;&nbsp; Địa chỉ mạng: 
+124</FONT></P>
+<P align=left><FONT face=Arial size=2>&nbsp;&nbsp;&nbsp; Địa chỉ máy chủ: 
+234.200.254</FONT></P>
+<HR>
+
+<P align=center><FONT face="Times New Roman"><B><FONT color=#ff0000>PcLeHoan 
+1996 - 2002</FONT><FONT face=.VnTime size=2><BR></FONT></B></FONT><FONT 
+face="Times New Roman" size=2><B>Mirror </B>: <A 
+href="http://www.pclehoan.com/andi/ndc.htm">http://www.pclehoan.com/andi/ndc.htm</A><BR><B>Mirror 
+</B>: <A 
+href="http://www.lehoanpc.net/andi/ndc.htm">http://www.lehoanpc.net/andi/ndc.htm</A></FONT><BR><FONT 
+face="Times New Roman" size=2><B>Mirror </B>: <A 
+href="http://www.ktlehoan.com/">http://www.ktlehoan.com/</A></FONT></P>
+<P align=center><A 
+href="http://member.bcentral.com/cgi-bin/fc/fastcounter-login?2828564" 
+target=_top><IMG src="Cau truc IP 1_files/digits.gif" border=0></A> 
+</P></BODY></HTML>

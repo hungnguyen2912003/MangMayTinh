@@ -1,0 +1,1575 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0064)http://www.echip.com.vn/echiproot/weblh/suutam/97/ctip/ctip3.htm -->
+<HTML><HEAD><TITLE>Cau truc IP</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=UTF-8">
+<META content="Le Hoan" name=Author>
+<META content="MSHTML 6.00.2900.2769" name=GENERATOR></HEAD>
+<BODY background="Cau truc IP 3_files/3.gif">
+<H3><FONT face=Arial size=2><A name=1></A><FONT face=Tahoma color=#0000ff 
+size=4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 4/ Địa chỉ mạng con của 
+Internet (IP subnetting)</FONT></FONT></H3>
+<H3 align=left><FONT face=Arial color=#ff0000 
+size=2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; a/ Nguyên nhân</FONT></H3>
+<P align=left><FONT face=Arial size=2>&nbsp;&nbsp;&nbsp; Như đã nêu trên địa chỉ 
+trên Internet thực sự là một tài nguyên, một mạng khi gia nhập Internet được 
+Trung tâm thông tin mạng Internet ( NIC) phân cho một số địa chỉ vừa đủ dùng với 
+yêu cầu lúc đó, sau này nếu mạng phát triển thêm lại phải xin NIC thêm, đó là 
+điều không thuận tiện cho các nhà khai thác mạng. </FONT></P>
+<P align=left><FONT face=Arial size=2>&nbsp;&nbsp;&nbsp; Hơn nữa các lớp địa chỉ 
+của Internet không phải hoàn toàn phù hợp với yêu cầu thực tế, địa chỉ lớp B 
+chẳng hạn, mỗi một địa chỉ mạng có thể cấp cho 65534 máy chủ, Thực tế có mạng 
+nhỏ chỉ có vài chục máy chủ thì sẽ lãng phí rất nhiều địa chỉ còn lại mà không 
+ai dùng được . Để khắc phục vấn đề này và tận dụng tối đa địa chỉ được NIC phân, 
+bắt đầu từ năm 1985 người ta nghĩ đến Địa chỉ mạng con.</FONT></P>
+<P align=left><FONT face=Arial size=2>&nbsp;&nbsp;&nbsp; Như vậy phân địa chỉ 
+mạng con là mở rộng địa chỉ cho nhiều mạng trên cơ sở <B>một địa chỉ mạng </B>mà 
+NIC phân cho, phù hợp với số lượng thực tế máy chủ có trên từng 
+mạng.</FONT></P><B>
+<H3 align=left></B><FONT face=Arial color=#ff0000 size=2>&nbsp;&nbsp;&nbsp; b/ 
+Phương pháp phân chia địa chỉ mạng con</FONT></H3>
+<P align=left><FONT face=Arial size=2>&nbsp;&nbsp;&nbsp; Trước khi nghiên cứu 
+phần này chúng ta cần phải hiểu qua một số khái niệm liên quan tới việc phân địa 
+chỉ các mạng con. </FONT></P>
+<P align=left><FONT face=Arial size=2>&nbsp;&nbsp;&nbsp; 1/ - <FONT 
+color=#0000ff>Default Mask:</FONT> (Giá trị trần địa chỉ mạng) được định nghĩa 
+trước cho từng lớp địa chỉ A,B,C. Thực chất là giá trị thập phân cao nhất (khi 
+tất cả 8 bit đều bằng 1) trong các Octet dành cho địa chỉ mạng - Net 
+ID.</FONT></P>
+<P align=left><FONT face=Arial size=2>&nbsp;&nbsp;&nbsp; Default Mask: 
+</FONT></P>
+<BLOCKQUOTE>
+  <P align=left><FONT face=Arial size=2>Lớp A 255.0.0.0</FONT></P>
+  <P align=left><FONT face=Arial size=2>Lớp B 255.255.0.0</FONT></P>
+  <P align=left><FONT face=Arial size=2>Lớp C 
+255.255.255.0</FONT></P></BLOCKQUOTE>
+<P align=left><FONT face=Arial size=2>&nbsp;&nbsp;&nbsp; 2/ - <FONT 
+color=#0000ff>Subnet Mask:</FONT> ( giá trị trần của từng mạng con)</FONT></P>
+<P align=left><FONT face=Arial size=2>&nbsp;&nbsp;&nbsp; Subnet Mask là kết hợp 
+của Default Mask với giá trị thập phân cao nhất của các bit lấy từ các Octet của 
+địa chỉ máy chủ sang phần địa chỉ mạng để tạo địa chỉ mạng con.</FONT></P>
+<P align=left><FONT face=Arial size=2>&nbsp;&nbsp;&nbsp; Subnet Mask bao giờ 
+cũng đi kèm với địa chỉ mạng tiêu chuẩn để cho người đọc biết địa chỉ mạng tiêu 
+chuẩn này dùng cả cho 254 máy chủ hay chia ra thành các mạng con. Mặt khác nó 
+còn giúp Router trong việc định tuyến cuộc gọi.</FONT></P><B>
+<P align=left><FONT face=Arial color=#0000ff size=2>&nbsp;&nbsp;&nbsp; Nguyên 
+tắc chung: </FONT></B></P>
+<P align=left><FONT face=Arial size=2>&nbsp;&nbsp;&nbsp; Lấy bớt một số bit của 
+phần địa chỉ máy chủ để tạo địa chỉ mạng con.</FONT></P>
+<P align=left><FONT face=Arial size=2>&nbsp;&nbsp;&nbsp; Lấy đi bao nhiêu bit 
+phụ thuộc vào số mạng con cần thiết (Subnet mask) mà nhà khai thác mạng quyết 
+định sẽ tạo ra.</FONT></P>
+<P align=left><FONT face=Arial size=2>&nbsp;&nbsp;&nbsp; Vì địa chỉ lớp A và B 
+đều đã hết, hơn nữa hiện tại mạng Internet của Tổng công ty do VDC quản lý đang 
+được phân 8 địa chỉ mạng lớp C nên chúng ta sẽ nghiên cứu kỹ phân chia địa chỉ 
+mạng con ở lớp C.</FONT></P>
+<H3 align=left><FONT face=Arial size=2><A name=2></A><FONT 
+color=#0000ff>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; a/ Địa chỉ mạng con của 
+địa chỉ lớp C</FONT></FONT></H3>
+<H3><FONT face=Arial color=#000000 size=2>&nbsp;&nbsp;&nbsp; Class 
+c:</FONT></H3>
+<P align=left><FONT face=Arial size=2><IMG height=94 
+src="Cau truc IP 3_files/ctip3a.gif" width=504 
+tppabs="http://home.vnn.vn/education/ip_address/image268.gif"> </FONT></P>
+<P align=left><FONT face=Arial size=2>&nbsp;&nbsp;&nbsp; Địa chỉ lớp C có 3 
+octet cho địa chỉ mạng và 1 octet cuối cho địa chỉ máy chủ vì vậy chỉ có 8 bit 
+lý thuyết để tạo mạng con, thực tế nếu dùng 1 bit để mở mạng con và 7 bit cho 
+địa chỉ máy chủ thì vẫn chỉ là một mạng và ngược lại 7 bit để cho mạng và 1 bit 
+cho địa chỉ máy chủ thì một mạng chỉ được một máy, như vậy không logic, ít nhất 
+phải dùng 2 bit để mở rộng địa chỉ và 2 bit cho địa chỉ máy chủ trên từng mạng. 
+Do vậy trên thực tế chỉ dùng như bảng sau.</FONT></P>
+<P><STRONG><FONT face=Arial size=2>&nbsp;&nbsp;&nbsp; Default Mask của lớp C : 
+255.255.255.0</FONT> </STRONG></P><PRE width=132><FONT face=Arial size=2>                                 <EM>Địa chỉ
+                                máy chủ</EM>                                                         
+                                  &lt;--------&gt;
+255.255.255.1   1 0 0 0 0 0 0 ;  192 ( 2 bit đ/ chỉ mạng con 6 bit đ/chỉ máy chủ)                                   
+255.255.255.1   1 1 0 0 0 0 0 ;  224 ( 3 bit đ/chỉ mạng con 5 bit đ/chỉ máy chủ)    
+255.255.255.1   1 1 1 0 0 0 0 ;  240 ( 4 bit đ/chỉ mạng con 4 bit đ/chỉ máy chủ)     
+255.255.255.1   1 1 1 1 0 0 0 ;  248 ( 5 bit đ/chỉ mạng con 3 bit đ/chỉ máy chủ)     
+255.255.255.1   1 1 1 1 1 0 0 ;  252 ( 6 bit đ/chỉ mạng con 2 bit đ/chỉ máy chủ)     
+&lt;---------------&gt;   &lt;---------&gt;
+ <EM>Default Mask</EM>        <EM>Địa chỉ</EM>                                              
+                            <EM>mạng con</EM>                                                   
+
+<EM> Trường      Subnetmask           Số lượng     Số máy chủ trên    
+  hợp                                          mạng con      từng mạng       
+</EM>
+   1        255.255.255.192            2                  62                
+   2        255.255.255.224            6                  30                
+   3        255.255.255.240            14                 14                
+   4        255.255.255.248            30                 6                 
+   5        255.255.255.252            62                 2                 
+</FONT></PRE>
+<P align=center><STRONG><FONT face=Arial size=2>Bảng 1: Khả năng chia mạng con 
+của địa chỉ Lớp C</FONT></STRONG></P>
+<P align=left><FONT face=Arial size=2>&nbsp;&nbsp;&nbsp; Như vậy một địa chỉ 
+mạng ở lớp C chỉ có <B>5 trường hợp lựa chọn</B> trên (Hay 5 Subnet Mask khác 
+nhau), tuỳ từng trường hợp cụ thể để quyết định số mạng con.</FONT></P>
+<P align=left><B><FONT face=Arial color=#0000ff 
+size=2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1/ Trường hợp 1 - Hai mạng 
+con</FONT></P></B>
+<P align=left><FONT face=Arial size=2>&nbsp;&nbsp;&nbsp; Subnet Mask 
+255.255.255.192.</FONT></P>
+<P align=left><FONT face=Arial size=2>&nbsp;&nbsp;&nbsp; Từ một địa chỉ tiêu 
+chuẩn tạo được địa chỉ cho hai mạng con, mỗi một mạng có 62 máy chủ.</FONT></P>
+<P align=left><FONT face=Arial size=2>&nbsp;&nbsp;&nbsp; Sử dụng hai bit (bit 7 
+và 6) của phần địa chỉ máy chủ để tạo mạng con. Như vậy còn lại 6 bit để phân 
+cho máy chủ.</FONT></P><B>
+<P align=left></B><FONT face=Arial color=#0000ff size=2>&nbsp;&nbsp;&nbsp; a/ 
+Tính địa chỉ mạng</FONT></P>
+<TABLE cellSpacing=0 cellPadding=7 width=424 border=0>
+  <TBODY>
+  <TR>
+    <TD vAlign=top align=right width=77></TD>
+    <TD vAlign=top width=39></TD>
+    <TD vAlign=top align=middle width=108><B><FONT face=Arial size=2>Octet 
+      4</FONT></B></TD>
+    <TD vAlign=top width=134></TD></TR>
+  <TR>
+    <TD vAlign=top align=right width=77><FONT face=Arial size=2>Bit</FONT></TD>
+    <TD vAlign=top width=39><FONT face=Arial size=2>7 6</FONT></TD>
+    <TD vAlign=top align=left width=108><FONT face=Arial size=2>5 4 3 2 1 
+      0</FONT></TD>
+    <TD></TD>
+    <TD vAlign=top width=134></TD></TR>
+  <TR>
+    <TD vAlign=top align=right width=77></TD>
+    <TD vAlign=top width=39></TD>
+    <TD vAlign=top width=108></TD>
+    <TD vAlign=top width=134></TD></TR>
+  <TR>
+    <TD vAlign=top align=right width=77><FONT face=Arial 
+      size=2>xxx.xxx.xxx.</FONT></TD>
+    <TD vAlign=top width=39><FONT face=Arial size=2>0 0</FONT></TD>
+    <TD vAlign=top align=left width=108><FONT face=Arial size=2>0 0 0 0 0 
+      0</FONT></TD>
+    <TD vAlign=top align=left width=134><FONT face=Arial size=2>= 
+      xxx.xxx.xxx.0</FONT></TD></TR>
+  <TR>
+    <TD vAlign=top align=right width=77><FONT face=Arial 
+      size=2>xxx.xxx.xxx.</FONT></TD>
+    <TD vAlign=top width=39><FONT face=Arial size=2>0 1</FONT></TD>
+    <TD vAlign=top align=left width=108><FONT face=Arial size=2>0 0 0 0 0 
+      0</FONT></TD>
+    <TD vAlign=top align=left width=134><FONT face=Arial size=2>= 
+      xxx.xxx.xxx.64</FONT></TD></TR>
+  <TR>
+    <TD vAlign=top align=right width=77><FONT face=Arial 
+      size=2>xxx.xxx.xxx.</FONT></TD>
+    <TD vAlign=top width=39><FONT face=Arial size=2>1 0</FONT></TD>
+    <TD vAlign=top align=left width=108><FONT face=Arial size=2>0 0 0 0 0 
+      0</FONT></TD>
+    <TD vAlign=top align=left width=134><FONT face=Arial size=2>= 
+      xxx.xxx.xxx.128</FONT></TD></TR>
+  <TR>
+    <TD vAlign=top align=right width=77><FONT face=Arial 
+      size=2>xxx.xxx.xxx.</FONT></TD>
+    <TD vAlign=top width=39><FONT face=Arial size=2>1 1</FONT></TD>
+    <TD vAlign=top align=left width=108><FONT face=Arial size=2>0 0 0 0 0 
+      0</FONT></TD>
+    <TD vAlign=top align=left width=134><FONT face=Arial size=2>= 
+      xxx.xxx.xxx.192 </FONT></TD></TR></TBODY></TABLE>
+<P align=left><FONT face=Arial size=2>&nbsp;&nbsp;&nbsp; Ghi chú: xxx.xxx.xxx là 
+địa chỉ mạng tiêu chuẩn của lớp C.</FONT></P>
+<P align=left><FONT face=Arial size=2>&nbsp;&nbsp;&nbsp; Địa chỉ của mạng là giá 
+trị của bit 7 và 6 lần lượt bằng 0 và 1. Trong trường hợp chia địa chỉ mạng con 
+không bao giờ được dùng địa chỉ khi các bit đều bằng 0 hay bằng 1. Do vậy trường 
+hợp 2 mạng con nói trên, địa chỉ mạng con sẽ là: </FONT></P>
+<P align=left><FONT face=Arial size=2>&nbsp;&nbsp;&nbsp; Mạng con 1: Địa chỉ 
+mạng xxx.xxx.xxx.64</FONT></P>
+<P align=left><FONT face=Arial size=2>&nbsp;&nbsp;&nbsp; Mạng con 2: Địa chỉ 
+mạng xxx.xxx.xxx.128</FONT></P><B>
+<P align=left></B><FONT face=Arial color=#0000ff 
+size=2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; b/ Tính địa chỉ cho máy chủ 
+cho mạng con 1</FONT></P>
+<P align=left><FONT face=Arial size=2>&nbsp;&nbsp;&nbsp; Chúng ta chỉ còn 6 bit 
+cho địa chỉ máy chủ trên từng mạng.</FONT></P>
+<TABLE cellSpacing=0 cellPadding=7 width=471 border=0>
+  <TBODY>
+  <TR>
+    <TD vAlign=top width=135></TD>
+    <TD vAlign=top width=72><B>
+      <P align=center><FONT face=Arial size=2>Octet 4</FONT></B></P></TD>
+    <TD vAlign=top width=222></TD></TR>
+  <TR>
+    <TD vAlign=top width=135></TD>
+    <TD vAlign=top width=72></TD>
+    <TD vAlign=top width=222></TD></TR>
+  <TR>
+    <TD vAlign=top width=135><B>
+      <P align=right></B><FONT face=Arial size=2>Bit 7 6</FONT></P></TD>
+    <TD vAlign=top width=72><FONT face=Arial size=2>5 4 3 2 1 0</FONT></TD>
+    <TD vAlign=top width=222></TD></TR>
+  <TR>
+    <TD vAlign=top width=135></TD>
+    <TD vAlign=top width=72></TD>
+    <TD vAlign=top width=222></TD></TR>
+  <TR>
+    <TD vAlign=top width=135>
+      <P align=right><FONT face=Arial size=2>xxx.xxx.xxx. 0 1</FONT></P></TD>
+    <TD vAlign=top width=72><FONT face=Arial size=2>0 0 0 0 0 0</FONT></TD>
+    <TD vAlign=top width=222>
+      <P align=left><FONT face=Arial size=2>= xxx.xxx.xxx.64 Địa chỉ 
+      mạng</FONT></P></TD></TR>
+  <TR>
+    <TD vAlign=top width=135>
+      <P align=right><FONT face=Arial size=2>xxx.xxx.xxx. 0 1</FONT></P></TD>
+    <TD vAlign=top width=72><FONT face=Arial size=2>0 0 0 0 0 1</FONT></TD>
+    <TD vAlign=top width=222>
+      <P align=left><FONT face=Arial size=2>= xxx.xxx.xxx.65</FONT></P></TD></TR>
+  <TR>
+    <TD vAlign=top width=135>
+      <P align=right><FONT face=Arial size=2>xxx.xxx.xxx. 0 1</FONT></P></TD>
+    <TD vAlign=top width=72><FONT face=Arial size=2>0 0 0 0 1 0</FONT></TD>
+    <TD vAlign=top width=222>
+      <P align=left><FONT face=Arial size=2>= xxx.xxx.xxx.66</FONT></P></TD></TR>
+  <TR>
+    <TD vAlign=top width=135>
+      <P align=right><FONT face=Arial size=2>. . . . . . . . . . . . 
+    .</FONT></P></TD>
+    <TD vAlign=top width=72><FONT face=Arial size=2>. . . . . . . . . 
+    </FONT></TD>
+    <TD vAlign=top width=222>
+      <P align=left><FONT face=Arial size=2>. . . . . . . . . . . . . 
+    </FONT></P></TD></TR>
+  <TR>
+    <TD vAlign=top width=135>
+      <P align=right><FONT face=Arial size=2>xxx.xxx.xxx. 0 1</FONT></P></TD>
+    <TD vAlign=top width=72><FONT face=Arial size=2>1 1 1 1 1 0</FONT></TD>
+    <TD vAlign=top width=222>
+      <P align=left><FONT face=Arial size=2>= xxx.xxx.xxx.126</FONT></P></TD></TR>
+  <TR>
+    <TD vAlign=top width=135>
+      <P align=right><FONT face=Arial size=2>xxx.xxx.xxx. 0 1</FONT></P></TD>
+    <TD vAlign=top width=72><FONT face=Arial size=2>1 1 1 1 1 1</FONT></TD>
+    <TD vAlign=top width=222>
+      <P align=left><FONT face=Arial size=2>=xxx.xxx.xxx.127 Không 
+      phân</FONT></P></TD></TR>
+  <TR>
+    <TD vAlign=top width=135>
+      <P align=right><FONT face=Arial size=2>Địa chỉ mạng con 1</FONT></P></TD>
+    <TD vAlign=top width=72></TD>
+    <TD vAlign=top width=222></TD></TR></TBODY></TABLE>
+<P align=left><FONT face=Arial size=2>&nbsp;&nbsp;&nbsp; Mỗi mạng còn lại 62 địa 
+chỉ cho máy chủ. </FONT></P>
+<P align=left><FONT face=Arial size=2>&nbsp;&nbsp;&nbsp; Mạng 1: Từ xxx.xxx.xxx. 
+065 đến xxx.xxx.xxx.126</FONT></P><B>
+<P align=left></B><FONT face=Arial color=#0000ff 
+size=2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; c/ Tính địa chỉ cho máy chủ 
+cho mạng con 2</FONT></P>
+<P align=left><FONT face=Arial size=2>&nbsp;&nbsp;&nbsp; Tương tự như cách tính 
+trên ta có </FONT></P>
+<TABLE cellSpacing=0 cellPadding=7 width=462 border=0>
+  <TBODY>
+  <TR>
+    <TD vAlign=top width=132></TD>
+    <TD vAlign=top width=79><B>
+      <P align=left><FONT face=Arial size=2>Octet 4</FONT></B></P></TD>
+    <TD vAlign=top width=209></TD></TR>
+  <TR>
+    <TD vAlign=top width=132></TD>
+    <TD vAlign=top width=79></TD>
+    <TD vAlign=top width=209></TD></TR>
+  <TR>
+    <TD vAlign=top width=132><B>
+      <P align=right></B><FONT face=Arial size=2>Bit 7 6</FONT></P></TD>
+    <TD vAlign=top width=79>
+      <P align=left><FONT face=Arial size=2>5 4 3 2 1 0</FONT></P></TD>
+    <TD vAlign=top width=209></TD></TR>
+  <TR>
+    <TD vAlign=top width=132></TD>
+    <TD vAlign=top width=79></TD>
+    <TD vAlign=top width=209></TD></TR>
+  <TR>
+    <TD vAlign=top width=132>
+      <P align=right><FONT face=Arial size=2>xxx.xxx.xxx. 1 0</FONT></P></TD>
+    <TD vAlign=top width=79>
+      <P align=left><FONT face=Arial size=2>0 0 0 0 0 0</FONT></P></TD>
+    <TD vAlign=top width=209>
+      <P align=left><FONT face=Arial size=2>= xxx.xxx.xxx.128 Địa chỉ 
+      mạng</FONT></P></TD></TR>
+  <TR>
+    <TD vAlign=top width=132>
+      <P align=right><FONT face=Arial size=2>xxx.xxx.xxx. 1 0</FONT></P></TD>
+    <TD vAlign=top width=79>
+      <P align=left><FONT face=Arial size=2>0 0 0 0 0 1</FONT></P></TD>
+    <TD vAlign=top width=209>
+      <P align=left><FONT face=Arial size=2>= xxx.xxx.xxx.129</FONT></P></TD></TR>
+  <TR>
+    <TD vAlign=top width=132>
+      <P align=right><FONT face=Arial size=2>xxx.xxx.xxx. 1 0</FONT></P></TD>
+    <TD vAlign=top width=79>
+      <P align=left><FONT face=Arial size=2>0 0 0 0 1 0</FONT></P></TD>
+    <TD vAlign=top width=209>
+      <P align=left><FONT face=Arial size=2>= xxx.xxx.xxx.130</FONT></P></TD></TR>
+  <TR>
+    <TD vAlign=top width=132>
+      <P align=right><FONT face=Arial size=2>. . . . . . . . . . . . 
+    .</FONT></P></TD>
+    <TD vAlign=top width=79>
+      <P align=left><FONT face=Arial size=2>. . . . . . . . ..</FONT></P></TD>
+    <TD vAlign=top width=209>
+      <P align=left><FONT face=Arial size=2>. . . . . . . . . . . . . 
+    </FONT></P></TD></TR>
+  <TR>
+    <TD vAlign=top width=132>
+      <P align=right><FONT face=Arial size=2>xxx.xxx.xxx. 1 0</FONT></P></TD>
+    <TD vAlign=top width=79>
+      <P align=left><FONT face=Arial size=2>1 1 1 1 1 0</FONT></P></TD>
+    <TD vAlign=top width=209>
+      <P align=left><FONT face=Arial size=2>= xxx.xxx.xxx.190</FONT></P></TD></TR>
+  <TR>
+    <TD vAlign=top width=132>
+      <P align=right><FONT face=Arial size=2>xxx.xxx.xxx. 1 0</FONT></P></TD>
+    <TD vAlign=top width=79>
+      <P align=left><FONT face=Arial size=2>1 1 1 1 1 1</FONT></P></TD>
+    <TD vAlign=top width=209>
+      <P align=left><FONT face=Arial size=2>= xxx.xxx.xxx.191 Không 
+      phân</FONT></P></TD></TR>
+  <TR>
+    <TD vAlign=top width=132>
+      <P align=right><FONT face=Arial size=2>Địa chỉ mạng con 2</FONT></P></TD>
+    <TD vAlign=top width=79></TD>
+    <TD vAlign=top width=209></TD></TR></TBODY></TABLE>
+<P align=left><FONT face=Arial size=2>&nbsp;&nbsp;&nbsp; Mạng 2: Địa chỉ máy chủ 
+trên mạng 2.</FONT></P>
+<P align=left><FONT face=Arial size=2>&nbsp;&nbsp;&nbsp; Từ xxx.xxx.xxx.129 đến 
+xxx.xxx.xxx.190.</FONT></P>
+<P align=left><STRONG><FONT face=Arial size=2>&nbsp;&nbsp;&nbsp; Tổng quát 
+lại:</FONT></STRONG></P>
+<TABLE cellSpacing=2 cellPadding=7 width=233 border=1>
+  <TBODY>
+  <TR>
+    <TD vAlign=top align=middle width="39%">
+      <P align=center><EM><FONT face=Arial size=2>Subnet ID</FONT></EM></P></TD>
+    <TD vAlign=top width="61%" colSpan=2>
+      <P align=center><EM><FONT face=Arial size=2>Hosts</FONT></EM></P></TD></TR>
+  <TR>
+    <TD vAlign=top align=middle width="39%" colSpan=2 height=8><FONT 
+      face=Arial size=2>0</FONT></TD>
+    <TD vAlign=top align=middle width="61%" height=8><FONT face=Arial 
+      size=2>1-62</FONT></TD></TR>
+  <TR>
+    <TD vAlign=top align=middle width="39%" colSpan=2 height=8>
+      <P align=center><FONT face=Arial size=2>64</FONT></P></TD>
+    <TD vAlign=top align=middle width="61%" height=8><FONT face=Arial 
+      size=2>65-126</FONT></TD></TR>
+  <TR>
+    <TD vAlign=top align=middle width="39%" colSpan=2 height=8>
+      <P align=center><FONT face=Arial size=2>128</FONT></P></TD>
+    <TD vAlign=top align=middle width="61%" height=8><FONT face=Arial 
+      size=2>129-190</FONT></TD></TR>
+  <TR>
+    <TD vAlign=top align=middle width="39%" colSpan=2 height=8><FONT 
+      face=Arial size=2>192</FONT></TD>
+    <TD vAlign=top align=middle width="61%" height=8><FONT face=Arial 
+      size=2>193-254</FONT></TD></TR></TBODY></TABLE>
+<P><FONT face=Arial color=#0000ff 
+size=2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; a/ Mạng con thứ 
+nhất</FONT></P>
+<P><FONT face=Arial size=2>&nbsp;&nbsp;&nbsp; * / Địa chỉ mạng con: 
+xxx.xxx.xxx.064 </FONT></P>
+<P><FONT face=Arial size=2>&nbsp;&nbsp;&nbsp; * / Địa chỉ các máy chủ trên mạng 
+con này từ.</FONT></P>
+<BLOCKQUOTE>
+  <BLOCKQUOTE>
+    <BLOCKQUOTE>
+      <P><FONT face=Arial size=2>xxx.xxx.xxx. 065</FONT></P>
+      <P><FONT face=Arial size=2>xxx.xxx.xxx. 066</FONT></P>
+      <P><FONT face=Arial size=2>xxx.xxx.xxx. 067</FONT></P>
+      <P><FONT face=Arial size=2>..............</FONT></P>
+      <P><FONT face=Arial size=2>đến xxx.xxx.xxx. 
+  126</FONT></P></BLOCKQUOTE></BLOCKQUOTE></BLOCKQUOTE>
+<P><FONT face=Arial color=#0000ff size=2>&nbsp;&nbsp;&nbsp; b/ Mạng con thứ 
+2</FONT></P>
+<P><FONT face=Arial size=2>&nbsp;&nbsp;&nbsp; */ Địa chỉ mạng con: xxx.xxx.xxx. 
+128 </FONT></P>
+<P><FONT face=Arial size=2>&nbsp;&nbsp;&nbsp; */ Địa chỉ các máy chủ trên mạng 
+con này từ.</FONT></P>
+<BLOCKQUOTE>
+  <BLOCKQUOTE>
+    <BLOCKQUOTE>
+      <P><FONT face=Arial size=2>xxx.xxx.xxx. 129</FONT></P>
+      <P><FONT face=Arial size=2>xxx.xxx.xxx. 130</FONT></P>
+      <P><FONT face=Arial size=2>............. </FONT></P>
+      <P><FONT face=Arial size=2>đến xxx.xxx.xxx. 
+  190</FONT></P></BLOCKQUOTE></BLOCKQUOTE></BLOCKQUOTE>
+<P><FONT face=Arial size=2>&nbsp;&nbsp;&nbsp; Địa chỉ máy chủ từ 1 đến 62 và từ 
+193 đến 254 và 127 ; 191 bị mất, nghĩa là mất 130 địa chỉ.</FONT></P>
+<P><EM><STRONG><FONT size=2><FONT face=Arial>&nbsp;&nbsp;&nbsp; Ví dụ: 
+</FONT></FONT></STRONG></EM><FONT face=Arial size=2>Địa chỉ tiêu chuẩn lớp C là 
+196. 200. 123 </FONT></P>
+<P><FONT face=Arial size=2>&nbsp;&nbsp;&nbsp; Subnetmask 255.255.255.192 
+</FONT></P>
+<P><FONT face=Arial size=2>&nbsp;&nbsp;&nbsp; Từ địa chỉ này ta có 2 mạng con 
+là:</FONT></P>
+<P><FONT face=Arial size=2>&nbsp;&nbsp;&nbsp; * <FONT color=#0000ff>Mạng 
+1:</FONT> Địa chỉ mạng 196.200.123.064</FONT></P>
+<BLOCKQUOTE>
+  <P><FONT face=Arial size=2>Địa chỉ Máy chủ trên mạng này. </FONT></P>
+  <P><FONT face=Arial size=2>Từ 196.200.123.065 đến 196. 200. 123. 
+  126.</FONT></P></BLOCKQUOTE>
+<P><FONT face=Arial size=2>&nbsp;&nbsp;&nbsp; * <FONT color=#0000ff>Mạng 
+2:</FONT> Địa chỉ mạng 196.200.123.128</FONT></P>
+<BLOCKQUOTE>
+  <P><FONT face=Arial size=2>Địa chỉ máy chủ trên mạng này.</FONT></P>
+  <P><FONT face=Arial size=2>Từ 196.200.123.129 đến 196.200.123. 
+190</FONT></P></BLOCKQUOTE><B>
+<P><FONT face=Arial color=#0000ff size=2>&nbsp;&nbsp;&nbsp; 2/ Trường hợp 2 - 
+Sáu mạng con</FONT></P></B>
+<P><FONT face=Arial size=2>&nbsp;&nbsp;&nbsp; Subnetmask: 
+255.255.255.224.</FONT></P>
+<P><FONT face=Arial size=2>&nbsp;&nbsp;&nbsp; Tạo được 6 mạng con, mỗi mạng con 
+có 30 máy chủ </FONT></P><B>
+<P></B><FONT face=Arial color=#0000ff size=2>&nbsp;&nbsp;&nbsp; a/ Tính địa chỉ 
+Mạng con</FONT><B></P></B>
+<P><FONT face=Arial size=2>&nbsp;&nbsp;&nbsp; Trưòng hợp này sử dụng 3 bit ( bit 
+7,6,5) của địa chỉ máy chủ (Octet 4) bổ sung cho địa chỉ mạng tiêu chuẩn để tạo 
+mạng con. </FONT></P>
+<TABLE cellSpacing=0 cellPadding=7 width=368 border=0>
+  <TBODY>
+  <TR>
+    <TD vAlign=top width=91></TD>
+    <TD vAlign=top width=36></TD>
+    <TD vAlign=top width=59><B><FONT face=Arial size=2>Octet 4</FONT></B></TD>
+    <TD vAlign=top width=126></TD></TR>
+  <TR>
+    <TD vAlign=top width=91></TD>
+    <TD vAlign=top width=36></TD>
+    <TD vAlign=top width=59></TD>
+    <TD vAlign=top width=126></TD></TR>
+  <TR>
+    <TD vAlign=top width=91><B>
+      <P align=right></B><FONT face=Arial size=2>Bit</FONT></P></TD>
+    <TD vAlign=top width=36><FONT face=Arial size=2>7 6 5</FONT></TD>
+    <TD vAlign=top width=59>
+      <P align=left><FONT face=Arial size=2>4 3 2 1 0</FONT></P></TD>
+    <TD vAlign=top width=126></TD></TR>
+  <TR>
+    <TD vAlign=top width=91></TD>
+    <TD vAlign=top width=36></TD>
+    <TD vAlign=top width=59></TD>
+    <TD vAlign=top width=126></TD></TR>
+  <TR>
+    <TD vAlign=top width=91>
+      <P align=right><FONT face=Arial size=2>xxx.xxx.xxx.</FONT></P></TD>
+    <TD vAlign=top width=36><FONT face=Arial size=2>0 0 0 </FONT></TD>
+    <TD vAlign=top width=59>
+      <P align=left><FONT face=Arial size=2>0 0 0 0 0</FONT></P></TD>
+    <TD vAlign=top width=126>
+      <P align=left><FONT face=Arial size=2>= xxx.xxx.xxx.0</FONT></P></TD></TR>
+  <TR>
+    <TD vAlign=top width=91>
+      <P align=right><FONT face=Arial size=2>xxx.xxx.xxx.</FONT></P></TD>
+    <TD vAlign=top width=36><FONT face=Arial size=2>0 0 1 </FONT></TD>
+    <TD vAlign=top width=59>
+      <P align=left><FONT face=Arial size=2>0 0 0 0 0</FONT></P></TD>
+    <TD vAlign=top width=126>
+      <P align=left><FONT face=Arial size=2>= xxx.xxx.xxx.32</FONT></P></TD></TR>
+  <TR>
+    <TD vAlign=top width=91>
+      <P align=right><FONT face=Arial size=2>xxx.xxx.xxx.</FONT></P></TD>
+    <TD vAlign=top width=36><FONT face=Arial size=2>0 1 0 </FONT></TD>
+    <TD vAlign=top width=59>
+      <P align=left><FONT face=Arial size=2>0 0 0 0 0</FONT></P></TD>
+    <TD vAlign=top width=126>
+      <P align=left><FONT face=Arial size=2>= xxx.xxx.xxx.64</FONT></P></TD></TR>
+  <TR>
+    <TD vAlign=top width=91>
+      <P align=right><FONT face=Arial size=2>xxx.xxx.xxx.</FONT></P></TD>
+    <TD vAlign=top width=36><FONT face=Arial size=2>0 1 1 </FONT></TD>
+    <TD vAlign=top width=59>
+      <P align=left><FONT face=Arial size=2>0 0 0 0 0</FONT></P></TD>
+    <TD vAlign=top width=126>
+      <P align=left><FONT face=Arial size=2>= xxx.xxx.xxx.96 </FONT></P></TD></TR>
+  <TR>
+    <TD vAlign=top width=91>
+      <P align=right><FONT face=Arial size=2>xxx.xxx.xxx.</FONT></P></TD>
+    <TD vAlign=top width=36><FONT face=Arial size=2>1 0 0 </FONT></TD>
+    <TD vAlign=top width=59>
+      <P align=left><FONT face=Arial size=2>0 0 0 0 0</FONT></P></TD>
+    <TD vAlign=top width=126>
+      <P align=left><FONT face=Arial size=2>= xxx.xxx.xxx.128 </FONT></P></TD></TR>
+  <TR>
+    <TD vAlign=top width=91>
+      <P align=right><FONT face=Arial size=2>xxx.xxx.xxx.</FONT></P></TD>
+    <TD vAlign=top width=36><FONT face=Arial size=2>1 0 1 </FONT></TD>
+    <TD vAlign=top width=59>
+      <P align=left><FONT face=Arial size=2>0 0 0 0 0</FONT></P></TD>
+    <TD vAlign=top width=126>
+      <P align=left><FONT face=Arial size=2>= xxx.xxx.xxx.160</FONT></P></TD></TR>
+  <TR>
+    <TD vAlign=top width=91>
+      <P align=right><FONT face=Arial size=2>xxx.xxx.xxx.</FONT></P></TD>
+    <TD vAlign=top width=36><FONT face=Arial size=2>1 1 0 </FONT></TD>
+    <TD vAlign=top width=59>
+      <P align=left><FONT face=Arial size=2>0 0 0 0 0</FONT></P></TD>
+    <TD vAlign=top width=126>
+      <P align=left><FONT face=Arial size=2>= xxx.xxx.xxx.192 </FONT></P></TD></TR>
+  <TR>
+    <TD vAlign=top width=91>
+      <P align=right><FONT face=Arial size=2>xxx.xxx.xxx.</FONT></P></TD>
+    <TD vAlign=top width=36><FONT face=Arial size=2>1 1 1 </FONT></TD>
+    <TD vAlign=top width=59>
+      <P align=left><FONT face=Arial size=2>0 0 0 0 0</FONT></P></TD>
+    <TD vAlign=top width=126>
+      <P align=left><FONT face=Arial size=2>= xxx.xxx.xxx.224 
+  </FONT></P></TD></TR></TBODY></TABLE>
+<P align=left><FONT face=Arial size=2>&nbsp;&nbsp;&nbsp; Bỏ trường hợp các bit 
+đều bằng 0 hay 1, chúng ta còn lại địa chỉ của 6 mạng con sau.</FONT></P>
+<BLOCKQUOTE>
+  <BLOCKQUOTE>
+    <BLOCKQUOTE>
+      <P><FONT face=Arial size=2>xxx.xxx.xxx.32 ; Mạng con 1</FONT></P>
+      <P><FONT face=Arial size=2>xxx.xxx.xxx.64 ; Mạng con 2</FONT></P>
+      <P><FONT face=Arial size=2>xxx.xxx.xxx.96 ; Mạng con 3</FONT></P>
+      <P><FONT face=Arial size=2>xxx.xxx.xxx.128 ; Mạng con 4</FONT></P>
+      <P><FONT face=Arial size=2>xxx.xxx.xxx.160 ; Mạng con 5</FONT></P>
+      <P><FONT face=Arial size=2>xxx.xxx.xxx.192 ; Mạng con 
+    6</FONT></P></BLOCKQUOTE></BLOCKQUOTE></BLOCKQUOTE><B>
+<P></B><FONT face=Arial color=#0000ff size=2>&nbsp;&nbsp;&nbsp; b / Tính địa chỉ 
+máy chủ cho mạng con 1</FONT></P>
+<TABLE cellSpacing=0 cellPadding=7 width=452 border=0>
+  <TBODY>
+  <TR>
+    <TD vAlign=top align=right width=82></TD>
+    <TD vAlign=top width=40></TD>
+    <TD vAlign=top width=60>
+      <P align=center><B><FONT face=Arial size=2>Octet 4</FONT></B></P></TD>
+    <TD vAlign=top width=214></TD></TR>
+  <TR>
+    <TD vAlign=top align=right width=82></TD>
+    <TD vAlign=top width=40></TD>
+    <TD vAlign=top width=60></TD>
+    <TD vAlign=top width=214></TD></TR>
+  <TR>
+    <TD vAlign=top align=right width=82><B>
+      <P align=right></B><FONT face=Arial size=2>Bit</FONT></P></TD>
+    <TD vAlign=top width=40>
+      <P align=left><FONT face=Arial size=2>7 6 5</FONT></P></TD>
+    <TD vAlign=top width=60>
+      <P align=left><FONT face=Arial size=2>4 3 2 1 0</FONT></P></TD>
+    <TD vAlign=top width=214></TD></TR>
+  <TR>
+    <TD vAlign=top align=right width=82></TD>
+    <TD vAlign=top width=40></TD>
+    <TD vAlign=top width=60></TD>
+    <TD vAlign=top width=214></TD></TR>
+  <TR>
+    <TD vAlign=top align=right width=82>
+      <P align=left><FONT face=Arial size=2>xxx.xxx.xxx.</FONT></P></TD>
+    <TD vAlign=top width=40>
+      <P align=left><FONT face=Arial size=2>0 0 1</FONT></P></TD>
+    <TD vAlign=top width=60>
+      <P align=left><FONT face=Arial size=2>0 0 0 0 0</FONT></P></TD>
+    <TD vAlign=top width=214>
+      <P align=left><FONT face=Arial size=2>= xxx.xxx.xxx. 32 Địa chỉ 
+      mạng</FONT></P></TD></TR>
+  <TR>
+    <TD vAlign=top align=right width=82>
+      <P align=left><FONT face=Arial size=2>xxx.xxx.xxx.</FONT></P></TD>
+    <TD vAlign=top width=40>
+      <P align=left><FONT face=Arial size=2>0 0 1</FONT></P></TD>
+    <TD vAlign=top width=60>
+      <P align=left><FONT face=Arial size=2>0 0 0 1 1</FONT></P></TD>
+    <TD vAlign=top width=214>
+      <P align=left><FONT face=Arial size=2>= xxx.xxx.xxx.33</FONT></P></TD></TR>
+  <TR>
+    <TD vAlign=top align=right width=82>
+      <P align=left><FONT face=Arial size=2>xxx.xxx.xxx.</FONT></P></TD>
+    <TD vAlign=top width=40>
+      <P align=left><FONT face=Arial size=2>0 0 1</FONT></P></TD>
+    <TD vAlign=top width=60>
+      <P align=left><FONT face=Arial size=2>0 0 0 0 0</FONT></P></TD>
+    <TD vAlign=top width=214>
+      <P align=left><FONT face=Arial size=2>= xxx.xxx.xxx.34</FONT></P></TD></TR>
+  <TR>
+    <TD vAlign=top align=right width=82>
+      <P align=left><FONT face=Arial size=2>xxx.xxx.xxx.</FONT></P></TD>
+    <TD vAlign=top width=40>
+      <P align=left><FONT face=Arial size=2>0 0 1</FONT></P></TD>
+    <TD vAlign=top width=60>
+      <P align=left><FONT face=Arial size=2>0 0 0 1 1</FONT></P></TD>
+    <TD vAlign=top width=214>
+      <P align=left><FONT face=Arial size=2>= xxx.xxx.xxx.35</FONT></P></TD></TR>
+  <TR>
+    <TD vAlign=top align=right width=82>
+      <P align=left><FONT face=Arial size=2>xxx.xxx.xxx.</FONT></P></TD>
+    <TD vAlign=top width=40>
+      <P align=left><FONT face=Arial size=2>0 0 1</FONT></P></TD>
+    <TD vAlign=top width=60>
+      <P align=left><FONT face=Arial size=2>0 0 1 0 0</FONT></P></TD>
+    <TD vAlign=top width=214>
+      <P align=left><FONT face=Arial size=2>= xxx.xxx.xxx.36</FONT></P></TD></TR>
+  <TR>
+    <TD vAlign=top align=right width=82>
+      <P align=left><FONT face=Arial size=2>. . . . . . . . .&nbsp; 
+    </FONT></P></TD>
+    <TD vAlign=top width=40>
+      <P align=left><FONT face=Arial size=2>. . . .</FONT></P></TD>
+    <TD vAlign=top width=60>
+      <P align=left><FONT face=Arial size=2>. . . . </FONT></P></TD>
+    <TD vAlign=top width=214>
+      <P align=left><FONT face=Arial size=2>. . . . . . . . . . . . . . . 
+      </FONT></P></TD></TR>
+  <TR>
+    <TD vAlign=top align=right width=82>
+      <P align=left><FONT face=Arial size=2>xxx.xxx.xxx.</FONT></P></TD>
+    <TD vAlign=top width=40>
+      <P align=left><FONT face=Arial size=2>0 0 1</FONT></P></TD>
+    <TD vAlign=top width=60>
+      <P align=left><FONT face=Arial size=2>1 1 1 1 0</FONT></P></TD>
+    <TD vAlign=top width=214>
+      <P align=left><FONT face=Arial size=2>= xxx.xxx.xxx.62</FONT></P></TD></TR>
+  <TR>
+    <TD vAlign=top align=right width=82>
+      <P align=left><FONT face=Arial size=2>xxx.xxx.xxx.</FONT></P></TD>
+    <TD vAlign=top width=40>
+      <P align=left><FONT face=Arial size=2>0 0 1</FONT></P></TD>
+    <TD vAlign=top width=60>
+      <P align=left><FONT face=Arial size=2>1 1 1 1 1</FONT></P></TD>
+    <TD vAlign=top width=214>
+      <P align=left><FONT face=Arial size=2>= xxx.xxx.xxx.63 Không 
+      phân</FONT></P></TD></TR></TBODY></TABLE>
+<P align=left><FONT face=Arial size=2>&nbsp;&nbsp;&nbsp; Như vậy địa chỉ máy chủ 
+của mạng con 1 sẽ từ 33 đến 62.</FONT></P>
+<P><FONT face=Arial size=2>&nbsp;&nbsp;&nbsp; Tương tự như cách tính đã nêu trên 
+chúng ta có thể tính được cho tất cả các trường hợp còn lại (xem bảng 1) và được 
+tổng hợp lại như sau.</FONT></P>
+<P><STRONG><FONT face=Arial color=#0000ff size=2>&nbsp;&nbsp;&nbsp; 1/ Trường 
+hợp 1: Subnetmask 255.255.255.192</FONT></STRONG> 
+<UL>
+  <LI><FONT face=Arial size=2>2 mạng con.</FONT> 
+  <LI><FONT face=Arial size=2>62 máy chủ mỗi mạng. </FONT></LI></UL>
+<P><STRONG><FONT face=Arial color=#0000ff size=2>&nbsp;&nbsp;&nbsp; 2/ Trường 
+hợp 2: Subnetmask 255.255.255.224</FONT></STRONG> 
+<UL>
+  <LI><FONT face=Arial size=2>6 mạng con.</FONT> 
+  <LI><FONT face=Arial size=2>30 máy chủ mỗi mạng.</FONT> </LI></UL>
+<P><STRONG><FONT face=Arial color=#0000ff size=2>&nbsp;&nbsp;&nbsp; 3/ Trường 
+hợp 3: Subnetmask 255.255.255.240</FONT> </STRONG>
+<UL>
+  <LI><FONT face=Arial size=2>14 mạng con.</FONT> 
+  <LI><FONT face=Arial size=2>14 máy chủ mỗi mạng </FONT></LI></UL>
+<P><STRONG><FONT face=Arial color=#0000ff size=2>&nbsp;&nbsp;&nbsp; 4/ Trường 
+hợp 4: Subnetmask 255.255.255.248</FONT></STRONG> 
+<UL>
+  <LI><FONT face=Arial size=2>30 mạng con.</FONT> 
+  <LI><FONT face=Arial size=2>6 máy chủ mỗi mạng.</FONT> </LI></UL>
+<P><STRONG><FONT face=Arial color=#0000ff size=2>&nbsp;&nbsp;&nbsp; 5/ Trường 
+hợp 5: Subnetmask 255.255.255.252.</FONT></STRONG> 
+<UL>
+  <LI><FONT face=Arial size=2>62 mạng con.</FONT> 
+  <LI><FONT face=Arial size=2>2 máy chủ mỗi mạng.</FONT> </LI></UL>
+<P align=left><FONT face=Arial size=2>&nbsp;&nbsp;&nbsp; Xem bảng tính địa chỉ 
+cho các trường hợp trên</FONT></P>
+<P align=left><STRONG><FONT size=2><FONT face=Arial>&nbsp;&nbsp;&nbsp; Ví 
+dụ:</FONT></FONT></STRONG> <FONT face=Arial size=2>Địa chỉ mạng lớp C mà NIC 
+phân cho VDC là 203.162.4.0. Trên địa chỉ này phân ra 2 mạng con thì địa chỉ sẽ 
+là.</FONT></P>
+<BLOCKQUOTE>
+  <P align=left><FONT face=Arial size=2>Mạng 1: Địa chỉ mạng 
+  203.162.4.64.</FONT></P><B>
+  <P align=left></B><FONT face=Arial size=2>Địa chỉ máy chủ trên mạng đó từ 
+  203.162.4.65 đến 203.162.4.126 </FONT></P>
+  <P align=left><FONT face=Arial size=2>Mạng 2: Địa chỉ mạng 
+  203.162.4.128.</FONT></P>
+  <P align=left><FONT face=Arial size=2>Địa chỉ máy chủ trên mạng đó từ 
+  203.162.4.129 đến 203.162.4.190</FONT></P></BLOCKQUOTE>
+<H3 align=left><FONT face=Arial size=2><A name=3></A><FONT 
+color=#ff0000>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; b/ Địa chỉ mạng con từ 
+địa chỉ lớp B</FONT></FONT></H3>
+<P align=left><FONT face=Arial size=2>&nbsp;&nbsp;&nbsp; Default Mask của lớp B 
+là 255.255.0.0</FONT></P><B>
+<P align=left><FONT face=Arial color=#ff0000 size=2>&nbsp;&nbsp;&nbsp; class b: 
+</FONT></B></P>
+<P align=left><FONT face=Arial size=2><IMG height=121 
+src="Cau truc IP 3_files/ctip3b.gif" width=504 
+tppabs="http://home.vnn.vn/education/ip_address/image269.gif"></FONT></P>
+<P align=left><FONT face=Arial 
+size=2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Net ID - Khi phân địa 
+chỉ mạng con sử dụng Octet 3</FONT></P>
+<P align=left><FONT face=Arial size=2>&nbsp;&nbsp;&nbsp; Địa chỉ lớp B có 2 
+Octet thứ 3 và thứ 4 dành cho địa chỉ máy chủ nên về nguyên lý có thể lấy được 
+cả 16 bit để tạo địa chỉ mạng . Nếu từ một địa chỉ mạng được NIC phân chúng ta 
+định mở rộng lên 254 mạng và mỗi mạng sẽ có 254 máy chủ. Trường hợp này sẽ lấy 
+hết 8 bit của octet thứ 3 bổ sung vào địa chỉ mạng và chỉ còn lại 8 bit thực tế 
+cho địa chỉ máy chủ, theo cách tính số thập phân 2<SUP>n </SUP>giá trị của 8 bit 
+như đã nêu ở phần lớp C, chúng ta sẽ có:</FONT></P><B>
+<P align=center><FONT face=Arial color=#0000ff size=2>Bảng phân chia địa chỉ 
+mạng con ở lớp B</FONT></P></B>
+<TABLE cellSpacing=2 cellPadding=7 width=568 border=1>
+  <TBODY>
+  <TR>
+    <TD vAlign=top align=middle width=146><FONT size=2><B><FONT 
+      face=Arial>Class B</FONT></B> <FONT face=Arial><BR>Subnetting (Default 
+      Subnet mask)<BR>255.255.0.0</FONT></FONT></TD>
+    <TD align=middle width=114><FONT face=Arial size=2>Subnet Mask </FONT></TD>
+    <TD align=middle width=118><FONT face=Arial size=2>#of subnets<BR>Số mạng 
+      con</FONT></TD>
+    <TD align=middle width=118><FONT face=Arial size=2>#of hosts per 
+      subnet<BR>Số máy chủ trên mỗi mạng con</FONT></TD></TR>
+  <TR>
+    <TD width=146 rowSpan=7><FONT face=Arial size=2>Sử dụng Octet 3 để mở rộng 
+      mạng con</FONT></TD>
+    <TD vAlign=top width=114><FONT face=Arial size=2>255.255.192.0</FONT></TD>
+    <TD vAlign=top width=118><FONT face=Arial size=2>2</FONT></TD>
+    <TD vAlign=top width=118><FONT face=Arial size=2>16382</FONT></TD></TR>
+  <TR>
+    <TD vAlign=top width=114><FONT face=Arial size=2>255.255.224.0</FONT></TD>
+    <TD vAlign=top width=118><FONT face=Arial size=2>6</FONT></TD>
+    <TD vAlign=top width=118><FONT face=Arial size=2>8190</FONT></TD></TR>
+  <TR>
+    <TD vAlign=top width=114><FONT face=Arial size=2>255.255.240.0</FONT></TD>
+    <TD vAlign=top width=118><FONT face=Arial size=2>14</FONT></TD>
+    <TD vAlign=top width=118><FONT face=Arial size=2>4094</FONT></TD></TR>
+  <TR>
+    <TD vAlign=top width=114><FONT face=Arial size=2>255.255.248.0</FONT></TD>
+    <TD vAlign=top width=118><FONT face=Arial size=2>30</FONT></TD>
+    <TD vAlign=top width=118><FONT face=Arial size=2>2460</FONT></TD></TR>
+  <TR>
+    <TD vAlign=top width=114><FONT face=Arial size=2>255.255.252.0</FONT></TD>
+    <TD vAlign=top width=118><FONT face=Arial size=2>62</FONT></TD>
+    <TD vAlign=top width=118><FONT face=Arial size=2>1022</FONT></TD></TR>
+  <TR>
+    <TD vAlign=top width=114><FONT face=Arial size=2>255.255.254.0</FONT></TD>
+    <TD vAlign=top width=118><FONT face=Arial size=2>126</FONT></TD>
+    <TD vAlign=top width=118><FONT face=Arial size=2>510</FONT></TD></TR>
+  <TR>
+    <TD vAlign=top width=114><FONT face=Arial size=2>255.255..255.0</FONT></TD>
+    <TD vAlign=top width=118><FONT face=Arial size=2>254</FONT></TD>
+    <TD vAlign=top width=118><FONT face=Arial size=2>254</FONT></TD></TR>
+  <TR>
+    <TD width=146 rowSpan=6><FONT face=Arial size=2>Sử dụng cả Octet 4 để mở 
+      rộng mạng con</FONT></TD>
+    <TD vAlign=top width=114><FONT face=Arial size=2>255.255.255.128</FONT></TD>
+    <TD vAlign=top width=118><FONT face=Arial size=2>510</FONT></TD>
+    <TD vAlign=top width=118><FONT face=Arial size=2>126</FONT></TD></TR>
+  <TR>
+    <TD vAlign=top width=114><FONT face=Arial size=2>255.255.255.192</FONT></TD>
+    <TD vAlign=top width=118><FONT face=Arial size=2>1022</FONT></TD>
+    <TD vAlign=top width=118><FONT face=Arial size=2>62</FONT></TD></TR>
+  <TR>
+    <TD vAlign=top width=114><FONT face=Arial size=2>255.255.255.224</FONT></TD>
+    <TD vAlign=top width=118><FONT face=Arial size=2>2046</FONT></TD>
+    <TD vAlign=top width=118><FONT face=Arial size=2>30</FONT></TD></TR>
+  <TR>
+    <TD vAlign=top width=114><FONT face=Arial size=2>255.255.255.240</FONT></TD>
+    <TD vAlign=top width=118><FONT face=Arial size=2>4094</FONT></TD>
+    <TD vAlign=top width=118><FONT face=Arial size=2>14</FONT></TD></TR>
+  <TR>
+    <TD vAlign=top width=114><FONT face=Arial size=2>255.255.255.248</FONT></TD>
+    <TD vAlign=top width=118><FONT face=Arial size=2>8190</FONT></TD>
+    <TD vAlign=top width=118><FONT face=Arial size=2>6</FONT></TD></TR>
+  <TR>
+    <TD vAlign=top width=114><FONT face=Arial size=2>255.255.255.252</FONT></TD>
+    <TD vAlign=top width=118><FONT face=Arial size=2>16382</FONT></TD>
+    <TD vAlign=top width=118><FONT face=Arial 
+size=2>2</FONT></TD></TR></TBODY></TABLE>
+<P align=left><FONT face=Arial size=2>&nbsp;&nbsp;&nbsp; Địa chỉ lớp B về lý 
+thuyết có 2 octet đầu cho địa chỉ mạng, khi chia mạng con theo phương pháp sử 
+dụng tất cả 8 bit trong 3 octet cho địa chỉ mạng, trên thực tương ứng với lớp C, 
+như vậy về địa chỉ NIC phân là lớp B nhưng cách tổ chức địa chỉ lại ở lớp C ( 
+Xem Bảng phụ lục phân địa chỉ mạng con ở lớp B ).</FONT></P>
+<P align=left><FONT face=Arial size=2>&nbsp;&nbsp;&nbsp; Trong bảng này cần chú 
+ý ở cột 6 - khoảng cách địa chỉ giữa 2 mạng con giới thiệu cho chúng ta cách 
+tính địa chỉ các mạng con, địa chỉ các máy chủ trên từng mạng liên quan tới cột 
+7,8,9,10.</FONT></P>
+<P align=left><FONT face=Arial size=2>&nbsp;&nbsp;&nbsp; Ví dụ: Trường hợp 
+Subnetmask 255.255.240.0 là rõ nhất.</FONT></P>
+<P align=left><FONT face=Arial size=2>&nbsp;&nbsp;&nbsp; Chia được 14 mạng con, 
+mỗi mạng con có 4094 máy chủ, khoảng cách địa chỉ giữa hai mạng con là 16.0 có 
+nghĩa. </FONT></P>
+<UL>
+  <LI>
+  <P align=left><FONT face=Arial size=2>Mạng con 1 có địa chỉ là xxx.yyy.16.0 ; 
+  Mạng con 2 sẽ có địa chỉ là xxx.yyy.16.0 + 16.0 = xxx.yyy.32.0 cứ tiếp tục như 
+  vậy ta sẽ tính được địa chỉ của từng mạng con và mạng con 14 là xxx.yyy. 
+  224.0.</FONT></P>
+  <LI>
+  <P align=left><FONT face=Arial size=2>Địa chỉ máy chủ đầu tiên trên mạng con 1 
+  là xxx.yyy.16.1 ; địa chỉ máy chủ đầu tiên trên mạng con 2 sẽ là xxx.yyy.16.1 
+  + 16.0 = xxx.yyy.32.1. Tiếp tục như vậy ta sẽ tính địa chỉ được máy chủ đầu 
+  tiên của mạng con 14 là xxx.yyy.224.1 v.v.. </FONT></P>
+  <LI>
+  <P align=left><FONT face=Arial size=2>Tương tự chúng ta biết được địa chỉ cuối 
+  cùng của các máy chủ trên một mạng con.</FONT></P></LI></UL>
+<P align=left><FONT face=Arial size=2>&nbsp;&nbsp;&nbsp; Theo hướng dẫn này 
+chúng ta sẽ tìm được các trường hợp khác.</FONT></P>
+<P align=left><FONT face=Arial size=2>&nbsp;&nbsp;&nbsp; Tóm lại chia địa chỉ 
+mạng con cũng phải theo một quy luật nhất định ngoài ý muốn của chúng ta, khi 
+chia mạng con cũng bị mất khá nhiều địa chỉ, mất ít hay nhiều tuỳ thuộc vào các 
+trường hợp cụ thể.</FONT></P>
+<H3 align=center><FONT face=Arial size=2><A name=4></A><FONT color=blue>phụ lục 
+tham khảo địa chỉ mạng con lớp b</FONT></FONT></H3>
+<TABLE cellPadding=7 width="100%" border=1>
+  <TBODY>
+  <TR>
+    <TD vAlign=top width="7%" bgColor=silver>
+      <P align=center><FONT face=Arial size=2>Subnet bit</FONT></P>
+      <P align=center><FONT face=Arial size=2>số bit dành cho mạng 
+    con</FONT></P></TD>
+    <TD vAlign=top width="12%" bgColor=silver>
+      <P align=center><FONT face=Arial size=2>Subnet mask</FONT></P></TD>
+    <TD vAlign=top width="8%" bgColor=silver>
+      <P align=center><FONT face=Arial size=2>No, of networks</FONT></P>
+      <P align=center><FONT face=Arial size=2>Số mạng con </FONT></P></TD>
+    <TD vAlign=top width="7%" bgColor=silver>
+      <P align=center><FONT face=Arial size=2>No, of hosts</FONT></P>
+      <P align=center><FONT face=Arial size=2>Số máy chủ trên từng 
+      mạng</FONT></P></TD>
+    <TD vAlign=top width="7%" bgColor=silver>
+      <P align=center><FONT face=Arial size=2>Net no.</FONT></P>
+      <P align=center><FONT face=Arial size=2>Thứ tự mạng</FONT></P>
+      <P align=center><FONT face=Arial size=2>con</FONT></P></TD>
+    <TD vAlign=top width="8%" bgColor=silver>
+      <P align=center><FONT face=Arial size=2>Net step</FONT></P>
+      <P align=center><FONT face=Arial size=2>khoảng cách địa chỉ giữa 2 mạng 
+      con</FONT></P></TD>
+    <TD vAlign=top width="12%" bgColor=silver>
+      <P align=center><FONT face=Arial size=2>Net id</FONT></P>
+      <P align=center><FONT face=Arial size=2>Địa chỉ các mạng con</FONT></P></TD>
+    <TD vAlign=top width="12%" bgColor=silver>
+      <P align=center><FONT face=Arial size=2>First host</FONT></P>
+      <P align=center><FONT face=Arial size=2>Địa chỉ đầu tiên của máy chủ trên 
+      từng mạng con</FONT></P></TD>
+    <TD vAlign=top width="13%" bgColor=silver>
+      <P align=center><FONT face=Arial size=2>Last host</FONT></P>
+      <P align=center><FONT face=Arial size=2>Địa chỉ cuối cùng của máy chủ trên 
+      từng mạng con</FONT></P></TD>
+    <TD vAlign=top width="14%" bgColor=silver>
+      <P align=center><FONT face=Arial size=2>Local broadcast</FONT></P>
+      <P align=center><FONT face=Arial size=2>Địa chỉ dùng trong nội bộ mạng 
+      </FONT></P></TD></TR>
+  <TR>
+    <TD align=middle width="7%" bgColor=silver><FONT face=Arial 
+    size=2>1</FONT></TD>
+    <TD align=middle width="12%" bgColor=silver><FONT face=Arial 
+      size=2>2</FONT></TD>
+    <TD align=middle width="8%" bgColor=silver><FONT face=Arial 
+    size=2>3</FONT></TD>
+    <TD align=middle width="7%" bgColor=silver><FONT face=Arial 
+    size=2>4</FONT></TD>
+    <TD align=middle width="7%" bgColor=silver><FONT face=Arial 
+    size=2>5</FONT></TD>
+    <TD align=middle width="8%" bgColor=silver><FONT face=Arial 
+    size=2>6</FONT></TD>
+    <TD align=middle width="12%" bgColor=silver><FONT face=Arial 
+      size=2>7</FONT></TD>
+    <TD align=middle width="12%" bgColor=silver><FONT face=Arial 
+      size=2>8</FONT></TD>
+    <TD align=middle width="13%" bgColor=silver><FONT face=Arial 
+      size=2>9</FONT></TD>
+    <TD align=middle width="14%" bgColor=silver><FONT face=Arial 
+      size=2>10</FONT></TD></TR>
+  <TR>
+    <TD vAlign=top width="7%">
+      <P align=center><FONT face=Arial size=2>2</FONT></P></TD>
+    <TD vAlign=top width="12%">
+      <P align=center><FONT face=Arial size=2>255.255.192.0</FONT></P></TD>
+    <TD vAlign=top width="8%">
+      <P align=center><FONT face=Arial size=2>2</FONT></P></TD>
+    <TD vAlign=top width="7%">
+      <P align=center><FONT face=Arial size=2>16382</FONT></P></TD>
+    <TD vAlign=top width="7%">
+      <P align=center><FONT face=Arial size=2>0*</FONT></P></TD>
+    <TD vAlign=top width="8%">
+      <P align=center><FONT face=Arial size=2>64.0</FONT></P></TD>
+    <TD vAlign=top width="12%"><FONT face=Arial size=2>&nbsp;</FONT></TD>
+    <TD vAlign=top width="12%">&nbsp;</TD>
+    <TD vAlign=top width="13%">&nbsp;</TD>
+    <TD vAlign=top width="14%">&nbsp;</TD></TR>
+  <TR>
+    <TD vAlign=top width="7%">&nbsp;</TD>
+    <TD vAlign=top width="12%">&nbsp;</TD>
+    <TD vAlign=top width="8%">&nbsp;</TD>
+    <TD vAlign=top width="7%">&nbsp;</TD>
+    <TD vAlign=top width="7%">
+      <P align=center><FONT face=Arial size=2>1</FONT></P></TD>
+    <TD vAlign=top width="8%"><FONT face=Arial size=2>&nbsp;</FONT></TD>
+    <TD vAlign=top width="12%">
+      <P align=center><FONT face=Arial size=2>xxx.yyy.64.0</FONT></P></TD>
+    <TD vAlign=top width="12%">
+      <P align=center><FONT face=Arial size=2>xxx.yyy.64.1</FONT></P></TD>
+    <TD vAlign=top width="13%">
+      <P align=center><FONT face=Arial size=2>xxx.yyy.127.254</FONT></P></TD>
+    <TD vAlign=top width="14%">
+      <P align=center><FONT face=Arial size=2>xxx.yyy.127.255</FONT></P></TD></TR>
+  <TR>
+    <TD vAlign=top width="7%"><FONT face=Arial size=2>&nbsp;</FONT></TD>
+    <TD vAlign=top width="12%">&nbsp;</TD>
+    <TD vAlign=top width="8%">&nbsp;</TD>
+    <TD vAlign=top width="7%">&nbsp;</TD>
+    <TD vAlign=top width="7%">
+      <P align=center><FONT face=Arial size=2>2</FONT></P></TD>
+    <TD vAlign=top width="8%"><FONT face=Arial size=2>&nbsp;</FONT></TD>
+    <TD vAlign=top width="12%">
+      <P align=center><FONT face=Arial size=2>xxx.yyy.128.0</FONT></P></TD>
+    <TD vAlign=top width="12%">
+      <P align=center><FONT face=Arial size=2>xxx.yyy.128.1</FONT></P></TD>
+    <TD vAlign=top width="13%">
+      <P align=center><FONT face=Arial size=2>xxx.yyy.191.254</FONT></P></TD>
+    <TD vAlign=top width="14%">
+      <P align=center><FONT face=Arial size=2>xxx.yyy.191.255</FONT></P></TD></TR>
+  <TR>
+    <TD vAlign=top width="7%"><FONT face=Arial size=2>&nbsp;</FONT></TD>
+    <TD vAlign=top width="12%">&nbsp;</TD>
+    <TD vAlign=top width="8%">&nbsp;</TD>
+    <TD vAlign=top width="7%">&nbsp;</TD>
+    <TD vAlign=top width="7%">
+      <P align=center><FONT face=Arial size=2>3*</FONT></P></TD>
+    <TD vAlign=top width="8%"><FONT face=Arial size=2>&nbsp;</FONT></TD>
+    <TD vAlign=top width="12%">&nbsp;</TD>
+    <TD vAlign=top width="12%">&nbsp;</TD>
+    <TD vAlign=top width="13%">&nbsp;</TD>
+    <TD vAlign=top width="14%">&nbsp;</TD></TR>
+  <TR>
+    <TD vAlign=top width="7%">
+      <P align=center><FONT face=Arial size=2>3</FONT></P></TD>
+    <TD vAlign=top width="12%">
+      <P align=center><FONT face=Arial size=2>255.255.224.0</FONT></P></TD>
+    <TD vAlign=top width="8%">
+      <P align=center><FONT face=Arial size=2>6</FONT></P></TD>
+    <TD vAlign=top width="7%">
+      <P align=center><FONT face=Arial size=2>8190</FONT></P></TD>
+    <TD vAlign=top width="7%">
+      <P align=center><FONT face=Arial size=2>0*</FONT></P></TD>
+    <TD vAlign=top width="8%">
+      <P align=center><FONT face=Arial size=2>32.0</FONT></P></TD>
+    <TD vAlign=top width="12%"><FONT face=Arial size=2>&nbsp;</FONT></TD>
+    <TD vAlign=top width="12%">&nbsp;</TD>
+    <TD vAlign=top width="13%">&nbsp;</TD>
+    <TD vAlign=top width="14%">&nbsp;</TD></TR>
+  <TR>
+    <TD vAlign=top width="7%">&nbsp;</TD>
+    <TD vAlign=top width="12%">&nbsp;</TD>
+    <TD vAlign=top width="8%">&nbsp;</TD>
+    <TD vAlign=top width="7%">&nbsp;</TD>
+    <TD vAlign=top width="7%">
+      <P align=center><FONT face=Arial size=2>1</FONT></P></TD>
+    <TD vAlign=top width="8%"><FONT face=Arial size=2>&nbsp;</FONT></TD>
+    <TD vAlign=top width="12%">
+      <P align=center><FONT face=Arial size=2>xxx.yyy.32.0</FONT></P></TD>
+    <TD vAlign=top width="12%">
+      <P align=center><FONT face=Arial size=2>xxx.yyy.32.1</FONT></P></TD>
+    <TD vAlign=top width="13%">
+      <P align=center><FONT face=Arial size=2>xxx.yyy.63.254</FONT></P></TD>
+    <TD vAlign=top width="14%">
+      <P align=center><FONT face=Arial size=2>xxx.yyy.63.255</FONT></P></TD></TR>
+  <TR>
+    <TD vAlign=top width="7%"><FONT face=Arial size=2>&nbsp;</FONT></TD>
+    <TD vAlign=top width="12%">&nbsp;</TD>
+    <TD vAlign=top width="8%">&nbsp;</TD>
+    <TD vAlign=top width="7%">&nbsp;</TD>
+    <TD vAlign=top width="7%">
+      <P align=center><FONT face=Arial size=2>2</FONT></P></TD>
+    <TD vAlign=top width="8%"><FONT face=Arial size=2>&nbsp;</FONT></TD>
+    <TD vAlign=top width="12%">
+      <P align=center><FONT face=Arial size=2>xxx.yyy.64.0</FONT></P></TD>
+    <TD vAlign=top width="12%"><FONT face=Arial size=2>&nbsp;</FONT></TD>
+    <TD vAlign=top width="13%">&nbsp;</TD>
+    <TD vAlign=top width="14%">
+      <P align=center><FONT face=Arial size=2>`</FONT></P></TD></TR>
+  <TR>
+    <TD vAlign=top width="7%"><FONT face=Arial size=2>&nbsp;</FONT></TD>
+    <TD vAlign=top width="12%">&nbsp;</TD>
+    <TD vAlign=top width="8%">&nbsp;</TD>
+    <TD vAlign=top width="7%">&nbsp;</TD>
+    <TD vAlign=top width="7%">
+      <P align=center><FONT face=Arial size=2>3</FONT></P></TD>
+    <TD vAlign=top width="8%"><FONT face=Arial size=2>&nbsp;</FONT></TD>
+    <TD vAlign=top width="12%">
+      <P align=center><FONT face=Arial size=2>xxx.yyy.96.0</FONT></P></TD>
+    <TD vAlign=top width="12%"><FONT face=Arial size=2>&nbsp;</FONT></TD>
+    <TD vAlign=top width="13%">&nbsp;</TD>
+    <TD vAlign=top width="14%">&nbsp;</TD></TR>
+  <TR>
+    <TD vAlign=top width="7%">&nbsp;</TD>
+    <TD vAlign=top width="12%">&nbsp;</TD>
+    <TD vAlign=top width="8%">&nbsp;</TD>
+    <TD vAlign=top width="7%">&nbsp;</TD>
+    <TD vAlign=top width="7%">
+      <P align=center><FONT face=Arial size=2>4</FONT></P></TD>
+    <TD vAlign=top width="8%"><FONT face=Arial size=2>&nbsp;</FONT></TD>
+    <TD vAlign=top width="12%">
+      <P align=center><FONT face=Arial size=2>xxx.yyy.128.0</FONT></P></TD>
+    <TD vAlign=top width="12%">
+      <P align=center><FONT face=Arial size=2>+32.0</FONT></P></TD>
+    <TD vAlign=top width="13%">
+      <P align=center><FONT face=Arial size=2>+32.0</FONT></P></TD>
+    <TD vAlign=top width="14%">
+      <P align=center><FONT face=Arial size=2>+32.0</FONT></P></TD></TR>
+  <TR>
+    <TD vAlign=top width="7%"><FONT face=Arial size=2>&nbsp;</FONT></TD>
+    <TD vAlign=top width="12%">&nbsp;</TD>
+    <TD vAlign=top width="8%">&nbsp;</TD>
+    <TD vAlign=top width="7%">&nbsp;</TD>
+    <TD vAlign=top width="7%">
+      <P align=center><FONT face=Arial size=2>5</FONT></P></TD>
+    <TD vAlign=top width="8%"><FONT face=Arial size=2>&nbsp;</FONT></TD>
+    <TD vAlign=top width="12%">
+      <P align=center><FONT face=Arial size=2>xxx.yyy.140.0</FONT></P></TD>
+    <TD vAlign=top width="12%"><FONT face=Arial size=2>&nbsp;</FONT></TD>
+    <TD vAlign=top width="13%">&nbsp;</TD>
+    <TD vAlign=top width="14%">&nbsp;</TD></TR>
+  <TR>
+    <TD vAlign=top width="7%">&nbsp;</TD>
+    <TD vAlign=top width="12%">&nbsp;</TD>
+    <TD vAlign=top width="8%">&nbsp;</TD>
+    <TD vAlign=top width="7%">&nbsp;</TD>
+    <TD vAlign=top width="7%">
+      <P align=center><FONT face=Arial size=2>6</FONT></P></TD>
+    <TD vAlign=top width="8%"><FONT face=Arial size=2>&nbsp;</FONT></TD>
+    <TD vAlign=top width="12%">
+      <P align=center><FONT face=Arial size=2>xxx.yyy.192.0</FONT></P></TD>
+    <TD vAlign=top width="12%">
+      <P align=center><FONT face=Arial size=2>xxx.yyy.192.1</FONT></P></TD>
+    <TD vAlign=top width="13%">
+      <P align=center><FONT face=Arial size=2>xxx.yyy.233.254</FONT></P></TD>
+    <TD vAlign=top width="14%">
+      <P align=center><FONT face=Arial size=2>xxx.yyy.223.255</FONT></P></TD></TR>
+  <TR>
+    <TD vAlign=top width="7%"><FONT face=Arial size=2>&nbsp;</FONT></TD>
+    <TD vAlign=top width="12%">&nbsp;</TD>
+    <TD vAlign=top width="8%">&nbsp;</TD>
+    <TD vAlign=top width="7%">&nbsp;</TD>
+    <TD vAlign=top width="7%">
+      <P align=center><FONT face=Arial size=2>7*</FONT></P></TD>
+    <TD vAlign=top width="8%"><FONT face=Arial size=2>&nbsp;</FONT></TD>
+    <TD vAlign=top width="12%">&nbsp;</TD>
+    <TD vAlign=top width="12%">&nbsp;</TD>
+    <TD vAlign=top width="13%">&nbsp;</TD>
+    <TD vAlign=top width="14%">&nbsp;</TD></TR>
+  <TR>
+    <TD vAlign=top width="7%">
+      <P align=center><FONT face=Arial size=2>4</FONT></P></TD>
+    <TD vAlign=top width="12%">
+      <P align=center><FONT face=Arial size=2>255.255.240.0</FONT></P></TD>
+    <TD vAlign=top width="8%">
+      <P align=center><FONT face=Arial size=2>14</FONT></P></TD>
+    <TD vAlign=top width="7%">
+      <P align=center><FONT face=Arial size=2>4094</FONT></P></TD>
+    <TD vAlign=top width="7%">
+      <P align=center><FONT face=Arial size=2>0*</FONT></P></TD>
+    <TD vAlign=top width="8%">
+      <P align=center><FONT face=Arial size=2>16.0</FONT></P></TD>
+    <TD vAlign=top width="12%"><FONT face=Arial size=2>&nbsp;</FONT></TD>
+    <TD vAlign=top width="12%">&nbsp;</TD>
+    <TD vAlign=top width="13%">&nbsp;</TD>
+    <TD vAlign=top width="14%">&nbsp;</TD></TR>
+  <TR>
+    <TD vAlign=top width="7%">&nbsp;</TD>
+    <TD vAlign=top width="12%">&nbsp;</TD>
+    <TD vAlign=top width="8%">&nbsp;</TD>
+    <TD vAlign=top width="7%">&nbsp;</TD>
+    <TD vAlign=top width="7%">
+      <P align=center><FONT face=Arial size=2>1</FONT></P></TD>
+    <TD vAlign=top width="8%"><FONT face=Arial size=2>&nbsp;</FONT></TD>
+    <TD vAlign=top width="12%">
+      <P align=center><FONT face=Arial size=2>xxx.yyy.16.0</FONT></P></TD>
+    <TD vAlign=top width="12%">
+      <P align=center><FONT face=Arial size=2>xxx.yyy.16.1</FONT></P></TD>
+    <TD vAlign=top width="13%">
+      <P align=center><FONT face=Arial size=2>xxx.yyy.31.254</FONT></P></TD>
+    <TD vAlign=top width="14%">
+      <P align=center><FONT face=Arial size=2>xxx.yyy.31.255</FONT></P></TD></TR>
+  <TR>
+    <TD vAlign=top width="7%"><FONT face=Arial size=2>&nbsp;</FONT></TD>
+    <TD vAlign=top width="12%">&nbsp;</TD>
+    <TD vAlign=top width="8%">&nbsp;</TD>
+    <TD vAlign=top width="7%">&nbsp;</TD>
+    <TD vAlign=top width="7%">
+      <P align=center><FONT face=Arial size=2>2</FONT></P></TD>
+    <TD vAlign=top width="8%"><FONT face=Arial size=2>&nbsp;</FONT></TD>
+    <TD vAlign=top width="12%">
+      <P align=center><FONT face=Arial size=2>xxx.yyy.32.0</FONT></P></TD>
+    <TD vAlign=top width="12%">
+      <P align=center><FONT face=Arial size=2>xxx.yyy.32.1</FONT></P></TD>
+    <TD vAlign=top width="13%">
+      <P align=center><FONT face=Arial size=2>xxx.yyy.47.254</FONT></P></TD>
+    <TD vAlign=top width="14%">
+      <P align=center><FONT face=Arial size=2>xxx.yyy.47.255</FONT></P></TD></TR>
+  <TR>
+    <TD vAlign=top width="7%"><FONT face=Arial size=2>&nbsp;</FONT></TD>
+    <TD vAlign=top width="12%">&nbsp;</TD>
+    <TD vAlign=top width="8%">&nbsp;</TD>
+    <TD vAlign=top width="7%">&nbsp;</TD>
+    <TD vAlign=top width="7%">
+      <P align=center><FONT face=Arial size=2>.</FONT></P></TD>
+    <TD vAlign=top width="8%"><FONT face=Arial size=2>&nbsp;</FONT></TD>
+    <TD vAlign=top width="12%">&nbsp;</TD>
+    <TD vAlign=top width="12%">&nbsp;</TD>
+    <TD vAlign=top width="13%">&nbsp;</TD>
+    <TD vAlign=top width="14%">&nbsp;</TD></TR>
+  <TR>
+    <TD vAlign=top width="7%">&nbsp;</TD>
+    <TD vAlign=top width="12%">&nbsp;</TD>
+    <TD vAlign=top width="8%">&nbsp;</TD>
+    <TD vAlign=top width="7%">&nbsp;</TD>
+    <TD vAlign=top width="7%">
+      <P align=center><FONT face=Arial size=2>.</FONT></P></TD>
+    <TD vAlign=top width="8%"><FONT face=Arial size=2>&nbsp;</FONT></TD>
+    <TD vAlign=top width="12%">&nbsp;</TD>
+    <TD vAlign=top width="12%">&nbsp;</TD>
+    <TD vAlign=top width="13%">&nbsp;</TD>
+    <TD vAlign=top width="14%">&nbsp;</TD></TR>
+  <TR>
+    <TD vAlign=top width="7%">&nbsp;</TD>
+    <TD vAlign=top width="12%">&nbsp;</TD>
+    <TD vAlign=top width="8%">&nbsp;</TD>
+    <TD vAlign=top width="7%">&nbsp;</TD>
+    <TD vAlign=top width="7%">
+      <P align=center><FONT face=Arial size=2>.</FONT></P></TD>
+    <TD vAlign=top width="8%"><FONT face=Arial size=2>&nbsp;</FONT></TD>
+    <TD vAlign=top width="12%">
+      <P align=center><FONT face=Arial size=2>+16.0</FONT></P></TD>
+    <TD vAlign=top width="12%">
+      <P align=center><FONT face=Arial size=2>+16.0</FONT></P></TD>
+    <TD vAlign=top width="13%">
+      <P align=center><FONT face=Arial size=2>+16.0</FONT></P></TD>
+    <TD vAlign=top width="14%">
+      <P align=center><FONT face=Arial size=2>+16.0</FONT></P></TD></TR>
+  <TR>
+    <TD vAlign=top width="7%"><FONT face=Arial size=2>&nbsp;</FONT></TD>
+    <TD vAlign=top width="12%">&nbsp;</TD>
+    <TD vAlign=top width="8%">&nbsp;</TD>
+    <TD vAlign=top width="7%">&nbsp;</TD>
+    <TD vAlign=top width="7%">
+      <P align=center><FONT face=Arial size=2>.</FONT></P></TD>
+    <TD vAlign=top width="8%"><FONT face=Arial size=2>&nbsp;</FONT></TD>
+    <TD vAlign=top width="12%">&nbsp;</TD>
+    <TD vAlign=top width="12%">&nbsp;</TD>
+    <TD vAlign=top width="13%">&nbsp;</TD>
+    <TD vAlign=top width="14%">&nbsp;</TD></TR>
+  <TR>
+    <TD vAlign=top width="7%">&nbsp;</TD>
+    <TD vAlign=top width="12%">&nbsp;</TD>
+    <TD vAlign=top width="8%">&nbsp;</TD>
+    <TD vAlign=top width="7%">&nbsp;</TD>
+    <TD vAlign=top width="7%">
+      <P align=center><FONT face=Arial size=2>.</FONT></P></TD>
+    <TD vAlign=top width="8%"><FONT face=Arial size=2>&nbsp;</FONT></TD>
+    <TD vAlign=top width="12%">&nbsp;</TD>
+    <TD vAlign=top width="12%">&nbsp;</TD>
+    <TD vAlign=top width="13%">&nbsp;</TD>
+    <TD vAlign=top width="14%">&nbsp;</TD></TR>
+  <TR>
+    <TD vAlign=top width="7%">&nbsp;</TD>
+    <TD vAlign=top width="12%">&nbsp;</TD>
+    <TD vAlign=top width="8%">&nbsp;</TD>
+    <TD vAlign=top width="7%">&nbsp;</TD>
+    <TD vAlign=top width="7%">
+      <P align=center><FONT face=Arial size=2>13</FONT></P></TD>
+    <TD vAlign=top width="8%"><FONT face=Arial size=2>&nbsp;</FONT></TD>
+    <TD vAlign=top width="12%">
+      <P align=center><FONT face=Arial size=2>xxx.yyy.208.0</FONT></P></TD>
+    <TD vAlign=top width="12%">
+      <P align=center><FONT face=Arial size=2>xxx.yyy.208.1</FONT></P></TD>
+    <TD vAlign=top width="13%">
+      <P align=center><FONT face=Arial size=2>xxx.yyy.223.254</FONT></P></TD>
+    <TD vAlign=top width="14%">
+      <P align=center><FONT face=Arial size=2>xxx.yyy.233.255</FONT></P></TD></TR>
+  <TR>
+    <TD vAlign=top width="7%"><FONT face=Arial size=2>&nbsp;</FONT></TD>
+    <TD vAlign=top width="12%">&nbsp;</TD>
+    <TD vAlign=top width="8%">&nbsp;</TD>
+    <TD vAlign=top width="7%">&nbsp;</TD>
+    <TD vAlign=top width="7%">
+      <P align=center><FONT face=Arial size=2>14</FONT></P></TD>
+    <TD vAlign=top width="8%"><FONT face=Arial size=2>&nbsp;</FONT></TD>
+    <TD vAlign=top width="12%">
+      <P align=center><FONT face=Arial size=2>xxx.yyy.224.0</FONT></P></TD>
+    <TD vAlign=top width="12%">
+      <P align=center><FONT face=Arial size=2>xxx.yyy.224.1</FONT></P></TD>
+    <TD vAlign=top width="13%">
+      <P align=center><FONT face=Arial size=2>xxx.yyy.239.254</FONT></P></TD>
+    <TD vAlign=top width="14%">
+      <P align=center><FONT face=Arial size=2>xxx.yyy239.255</FONT></P></TD></TR>
+  <TR>
+    <TD align=middle width="7%" bgColor=silver><FONT face=Arial 
+    size=2>1</FONT></TD>
+    <TD align=middle width="7%" bgColor=silver><FONT face=Arial 
+    size=2>2</FONT></TD>
+    <TD align=middle width="7%" bgColor=silver><FONT face=Arial 
+    size=2>3</FONT></TD>
+    <TD align=middle width="7%" bgColor=silver><FONT face=Arial 
+    size=2>4</FONT></TD>
+    <TD align=middle width="7%" bgColor=silver><FONT face=Arial 
+    size=2>5</FONT></TD>
+    <TD align=middle width="7%" bgColor=silver><FONT face=Arial 
+    size=2>6</FONT></TD>
+    <TD align=middle width="7%" bgColor=silver><FONT face=Arial 
+    size=2>7</FONT></TD>
+    <TD align=middle width="7%" bgColor=silver><FONT face=Arial 
+    size=2>8</FONT></TD>
+    <TD align=middle width="7%" bgColor=silver><FONT face=Arial 
+    size=2>9</FONT></TD>
+    <TD align=middle width="7%" bgColor=silver><FONT face=Arial 
+      size=2>10</FONT></TD></TR>
+  <TR>
+    <TD vAlign=top width="7%">
+      <P align=center><FONT face=Arial size=2>5</FONT></P></TD>
+    <TD vAlign=top width="12%">
+      <P align=center><FONT face=Arial size=2>255.255.248.0</FONT></P></TD>
+    <TD vAlign=top width="8%">
+      <P align=center><FONT face=Arial size=2>30</FONT></P></TD>
+    <TD vAlign=top width="7%">
+      <P align=center><FONT face=Arial size=2>2046</FONT></P></TD>
+    <TD vAlign=top width="7%">
+      <P align=center><FONT face=Arial size=2>0*</FONT></P></TD>
+    <TD vAlign=top width="8%">
+      <P align=center><FONT face=Arial size=2>8.0</FONT></P></TD>
+    <TD vAlign=top width="12%"><FONT face=Arial size=2>&nbsp;</FONT></TD>
+    <TD vAlign=top width="12%">&nbsp;</TD>
+    <TD vAlign=top width="13%">&nbsp;</TD>
+    <TD vAlign=top width="14%">&nbsp;</TD></TR>
+  <TR>
+    <TD vAlign=top width="7%">&nbsp;</TD>
+    <TD vAlign=top width="12%">&nbsp;</TD>
+    <TD vAlign=top width="8%">&nbsp;</TD>
+    <TD vAlign=top width="7%">&nbsp;</TD>
+    <TD vAlign=top width="7%"><FONT face=Arial size=2>1</FONT></TD>
+    <TD vAlign=top width="8%"><FONT face=Arial size=2>&nbsp;</FONT></TD>
+    <TD vAlign=top width="12%"><FONT face=Arial size=2>xxx.yyy.8.0</FONT></TD>
+    <TD vAlign=top width="12%"><FONT face=Arial size=2>xxx.yyy.8.1</FONT></TD>
+    <TD vAlign=top width="13%"><FONT face=Arial 
+size=2>xxx.yyy.15.254</FONT></TD>
+    <TD vAlign=top width="14%"><FONT face=Arial 
+  size=2>xxx.yyy.15,255</FONT></TD></TR>
+  <TR>
+    <TD vAlign=top width="7%"><FONT face=Arial size=2>&nbsp;</FONT></TD>
+    <TD vAlign=top width="12%">&nbsp;</TD>
+    <TD vAlign=top width="8%">&nbsp;</TD>
+    <TD vAlign=top width="7%">&nbsp;</TD>
+    <TD vAlign=top width="7%"><FONT face=Arial size=2>.</FONT></TD>
+    <TD vAlign=top width="8%"><FONT face=Arial size=2>&nbsp;</FONT></TD>
+    <TD vAlign=top width="12%">&nbsp;</TD>
+    <TD vAlign=top width="12%">&nbsp;</TD>
+    <TD vAlign=top width="13%">&nbsp;</TD>
+    <TD vAlign=top width="14%">&nbsp;</TD></TR>
+  <TR>
+    <TD vAlign=top width="7%">&nbsp;</TD>
+    <TD vAlign=top width="12%">&nbsp;</TD>
+    <TD vAlign=top width="8%">&nbsp;</TD>
+    <TD vAlign=top width="7%">&nbsp;</TD>
+    <TD vAlign=top width="7%"><FONT face=Arial size=2>.</FONT></TD>
+    <TD vAlign=top width="8%"><FONT face=Arial size=2>&nbsp;</FONT></TD>
+    <TD vAlign=top width="12%">&nbsp;</TD>
+    <TD vAlign=top width="12%">&nbsp;</TD>
+    <TD vAlign=top width="13%">&nbsp;</TD>
+    <TD vAlign=top width="14%">&nbsp;</TD></TR>
+  <TR>
+    <TD vAlign=top width="7%">&nbsp;</TD>
+    <TD vAlign=top width="12%">&nbsp;</TD>
+    <TD vAlign=top width="8%">&nbsp;</TD>
+    <TD vAlign=top width="7%">&nbsp;</TD>
+    <TD vAlign=top width="7%"><FONT face=Arial size=2>.</FONT></TD>
+    <TD vAlign=top width="8%"><FONT face=Arial size=2>&nbsp;</FONT></TD>
+    <TD vAlign=top width="12%"><FONT face=Arial size=2>+8.0</FONT></TD>
+    <TD vAlign=top width="12%"><FONT face=Arial size=2>+8.0</FONT></TD>
+    <TD vAlign=top width="13%"><FONT face=Arial size=2>+8.0</FONT></TD>
+    <TD vAlign=top width="14%"><FONT face=Arial size=2>+8.0</FONT></TD></TR>
+  <TR>
+    <TD vAlign=top width="7%"><FONT face=Arial size=2>&nbsp;</FONT></TD>
+    <TD vAlign=top width="12%">&nbsp;</TD>
+    <TD vAlign=top width="8%">&nbsp;</TD>
+    <TD vAlign=top width="7%">&nbsp;</TD>
+    <TD vAlign=top width="7%"><FONT face=Arial size=2>.</FONT></TD>
+    <TD vAlign=top width="8%"><FONT face=Arial size=2>&nbsp;</FONT></TD>
+    <TD vAlign=top width="12%">&nbsp;</TD>
+    <TD vAlign=top width="12%">&nbsp;</TD>
+    <TD vAlign=top width="13%">&nbsp;</TD>
+    <TD vAlign=top width="14%">&nbsp;</TD></TR>
+  <TR>
+    <TD vAlign=top width="7%">&nbsp;</TD>
+    <TD vAlign=top width="12%">&nbsp;</TD>
+    <TD vAlign=top width="8%">&nbsp;</TD>
+    <TD vAlign=top width="7%">&nbsp;</TD>
+    <TD vAlign=top width="7%"><FONT face=Arial size=2>.</FONT></TD>
+    <TD vAlign=top width="8%"><FONT face=Arial size=2>&nbsp;</FONT></TD>
+    <TD vAlign=top width="12%">&nbsp;</TD>
+    <TD vAlign=top width="12%">&nbsp;</TD>
+    <TD vAlign=top width="13%">&nbsp;</TD>
+    <TD vAlign=top width="14%">&nbsp;</TD></TR>
+  <TR>
+    <TD vAlign=top width="7%">&nbsp;</TD>
+    <TD vAlign=top width="12%">&nbsp;</TD>
+    <TD vAlign=top width="8%">&nbsp;</TD>
+    <TD vAlign=top width="7%">&nbsp;</TD>
+    <TD vAlign=top width="7%"><FONT face=Arial size=2>29</FONT></TD>
+    <TD vAlign=top width="8%"><FONT face=Arial size=2>&nbsp;</FONT></TD>
+    <TD vAlign=top width="12%"><FONT face=Arial size=2>xxx.yyy.240.0</FONT></TD>
+    <TD vAlign=top width="12%"><FONT face=Arial size=2>xxx.yyy.240.1</FONT></TD>
+    <TD vAlign=top width="13%"><FONT face=Arial 
+    size=2>xxx.yyy.247.254</FONT></TD>
+    <TD vAlign=top width="14%"><FONT face=Arial 
+    size=2>xxx.yyy.247.255</FONT></TD></TR>
+  <TR>
+    <TD vAlign=top width="7%"><FONT face=Arial size=2>&nbsp;</FONT></TD>
+    <TD vAlign=top width="12%">&nbsp;</TD>
+    <TD vAlign=top width="8%">&nbsp;</TD>
+    <TD vAlign=top width="7%">&nbsp;</TD>
+    <TD vAlign=top width="7%"><FONT face=Arial size=2>30</FONT></TD>
+    <TD vAlign=top width="8%"><FONT face=Arial size=2>&nbsp;</FONT></TD>
+    <TD vAlign=top width="12%"><FONT face=Arial size=2>xxx.yyy.248.0</FONT></TD>
+    <TD vAlign=top width="12%"><FONT face=Arial size=2>xxx.yyy.248.1</FONT></TD>
+    <TD vAlign=top width="13%"><FONT face=Arial 
+    size=2>xxx.yyy.255.254</FONT></TD>
+    <TD vAlign=top width="14%"><FONT face=Arial 
+    size=2>xxx.yyy.255.255</FONT></TD></TR>
+  <TR>
+    <TD vAlign=top width="7%"><FONT face=Arial size=2>&nbsp;</FONT></TD>
+    <TD vAlign=top width="12%">&nbsp;</TD>
+    <TD vAlign=top width="8%">&nbsp;</TD>
+    <TD vAlign=top width="7%">&nbsp;</TD>
+    <TD vAlign=top width="7%"><FONT face=Arial size=2>31*</FONT></TD>
+    <TD vAlign=top width="8%"><FONT face=Arial size=2>&nbsp;</FONT></TD>
+    <TD vAlign=top width="12%">&nbsp;</TD>
+    <TD vAlign=top width="12%">&nbsp;</TD>
+    <TD vAlign=top width="13%">&nbsp;</TD>
+    <TD vAlign=top width="14%">&nbsp;</TD></TR>
+  <TR>
+    <TD vAlign=top width="7%"><FONT face=Arial size=2>6</FONT></TD>
+    <TD vAlign=top width="12%"><FONT face=Arial size=2>255.255.252.0</FONT></TD>
+    <TD vAlign=top width="8%"><FONT face=Arial size=2>62</FONT></TD>
+    <TD vAlign=top width="7%"><FONT face=Arial size=2>1022</FONT></TD>
+    <TD vAlign=top width="7%"><FONT face=Arial size=2>0*</FONT></TD>
+    <TD vAlign=top width="8%"><FONT face=Arial size=2>4.0</FONT></TD>
+    <TD vAlign=top width="12%"><FONT face=Arial size=2>&nbsp;</FONT></TD>
+    <TD vAlign=top width="12%">&nbsp;</TD>
+    <TD vAlign=top width="13%">&nbsp;</TD>
+    <TD vAlign=top width="14%">&nbsp;</TD></TR>
+  <TR>
+    <TD vAlign=top width="7%">&nbsp;</TD>
+    <TD vAlign=top width="12%">&nbsp;</TD>
+    <TD vAlign=top width="8%">&nbsp;</TD>
+    <TD vAlign=top width="7%">&nbsp;</TD>
+    <TD vAlign=top width="7%"><FONT face=Arial size=2>1</FONT></TD>
+    <TD vAlign=top width="8%"><FONT face=Arial size=2>&nbsp;</FONT></TD>
+    <TD vAlign=top width="12%"><FONT face=Arial size=2>xxx.yyy.4.0</FONT></TD>
+    <TD vAlign=top width="12%"><FONT face=Arial size=2>xxx.yyy.4.1</FONT></TD>
+    <TD vAlign=top width="13%"><FONT face=Arial size=2>xxx.yyy.7.254</FONT></TD>
+    <TD vAlign=top width="14%"><FONT face=Arial 
+  size=2>xxx.yyy.7.255</FONT></TD></TR>
+  <TR>
+    <TD vAlign=top width="7%"><FONT face=Arial size=2>&nbsp;</FONT></TD>
+    <TD vAlign=top width="12%">&nbsp;</TD>
+    <TD vAlign=top width="8%">&nbsp;</TD>
+    <TD vAlign=top width="7%">&nbsp;</TD>
+    <TD vAlign=top width="7%"><FONT face=Arial size=2>.</FONT></TD>
+    <TD vAlign=top width="8%"><FONT face=Arial size=2>&nbsp;</FONT></TD>
+    <TD vAlign=top width="12%">&nbsp;</TD>
+    <TD vAlign=top width="12%">&nbsp;</TD>
+    <TD vAlign=top width="13%">&nbsp;</TD>
+    <TD vAlign=top width="14%">&nbsp;</TD></TR>
+  <TR>
+    <TD vAlign=top width="7%">&nbsp;</TD>
+    <TD vAlign=top width="12%">&nbsp;</TD>
+    <TD vAlign=top width="8%">&nbsp;</TD>
+    <TD vAlign=top width="7%">&nbsp;</TD>
+    <TD vAlign=top width="7%"><FONT face=Arial size=2>.</FONT></TD>
+    <TD vAlign=top width="8%"><FONT face=Arial size=2>&nbsp;</FONT></TD>
+    <TD vAlign=top width="12%"><FONT face=Arial size=2>+4.0</FONT></TD>
+    <TD vAlign=top width="12%"><FONT face=Arial size=2>+4.0</FONT></TD>
+    <TD vAlign=top width="13%"><FONT face=Arial size=2>+4.0</FONT></TD>
+    <TD vAlign=top width="14%"><FONT face=Arial size=2>+4.0</FONT></TD></TR>
+  <TR>
+    <TD vAlign=top width="7%"><FONT face=Arial size=2>&nbsp;</FONT></TD>
+    <TD vAlign=top width="12%">&nbsp;</TD>
+    <TD vAlign=top width="8%">&nbsp;</TD>
+    <TD vAlign=top width="7%">&nbsp;</TD>
+    <TD vAlign=top width="7%"><FONT face=Arial size=2>.</FONT></TD>
+    <TD vAlign=top width="8%"><FONT face=Arial size=2>&nbsp;</FONT></TD>
+    <TD vAlign=top width="12%">&nbsp;</TD>
+    <TD vAlign=top width="12%">&nbsp;</TD>
+    <TD vAlign=top width="13%">&nbsp;</TD>
+    <TD vAlign=top width="14%">&nbsp;</TD></TR>
+  <TR>
+    <TD vAlign=top width="7%">&nbsp;</TD>
+    <TD vAlign=top width="12%">&nbsp;</TD>
+    <TD vAlign=top width="8%">&nbsp;</TD>
+    <TD vAlign=top width="7%">&nbsp;</TD>
+    <TD vAlign=top width="7%"><FONT face=Arial size=2>62</FONT></TD>
+    <TD vAlign=top width="8%"><FONT face=Arial size=2>&nbsp;</FONT></TD>
+    <TD vAlign=top width="12%"><FONT face=Arial size=2>xxx.yyy.248.0</FONT></TD>
+    <TD vAlign=top width="12%"><FONT face=Arial size=2>xxx.yyy.248.1</FONT></TD>
+    <TD vAlign=top width="13%"><FONT face=Arial 
+    size=2>xxx.yyy.251.254</FONT></TD>
+    <TD vAlign=top width="14%"><FONT face=Arial 
+    size=2>xxx.yyy.251.255</FONT></TD></TR>
+  <TR>
+    <TD vAlign=top width="7%"><FONT face=Arial size=2>&nbsp;</FONT></TD>
+    <TD vAlign=top width="12%">&nbsp;</TD>
+    <TD vAlign=top width="8%">&nbsp;</TD>
+    <TD vAlign=top width="7%">&nbsp;</TD>
+    <TD vAlign=top width="7%"><FONT face=Arial size=2>63*</FONT></TD>
+    <TD vAlign=top width="8%"><FONT face=Arial size=2>&nbsp;</FONT></TD>
+    <TD vAlign=top width="12%">&nbsp;</TD>
+    <TD vAlign=top width="12%">&nbsp;</TD>
+    <TD vAlign=top width="13%">&nbsp;</TD>
+    <TD vAlign=top width="14%">&nbsp;</TD></TR>
+  <TR>
+    <TD vAlign=top width="7%"><FONT face=Arial size=2>7</FONT></TD>
+    <TD vAlign=top width="12%"><FONT face=Arial size=2>255.255.254.0</FONT></TD>
+    <TD vAlign=top width="8%"><FONT face=Arial size=2>126</FONT></TD>
+    <TD vAlign=top width="7%"><FONT face=Arial size=2>510</FONT></TD>
+    <TD vAlign=top width="7%"><FONT face=Arial size=2>0*</FONT></TD>
+    <TD vAlign=top width="8%"><FONT face=Arial size=2>2.0</FONT></TD>
+    <TD vAlign=top width="12%"><FONT face=Arial size=2>&nbsp;</FONT></TD>
+    <TD vAlign=top width="12%">&nbsp;</TD>
+    <TD vAlign=top width="13%">&nbsp;</TD>
+    <TD vAlign=top width="14%">&nbsp;</TD></TR>
+  <TR>
+    <TD vAlign=top width="7%">&nbsp;</TD>
+    <TD vAlign=top width="12%">&nbsp;</TD>
+    <TD vAlign=top width="8%">&nbsp;</TD>
+    <TD vAlign=top width="7%">&nbsp;</TD>
+    <TD vAlign=top width="7%"><FONT face=Arial size=2>1</FONT></TD>
+    <TD vAlign=top width="8%"><FONT face=Arial size=2>&nbsp;</FONT></TD>
+    <TD vAlign=top width="12%"><FONT face=Arial size=2>xxx.yyy.2.0</FONT></TD>
+    <TD vAlign=top width="12%"><FONT face=Arial size=2>xxx.yyy.2.1</FONT></TD>
+    <TD vAlign=top width="13%"><FONT face=Arial size=2>xxx.yyy.3.254</FONT></TD>
+    <TD vAlign=top width="14%"><FONT face=Arial 
+  size=2>xxx.yyy.3.255</FONT></TD></TR>
+  <TR>
+    <TD vAlign=top width="7%"><FONT face=Arial size=2>&nbsp;</FONT></TD>
+    <TD vAlign=top width="12%">&nbsp;</TD>
+    <TD vAlign=top width="8%">&nbsp;</TD>
+    <TD vAlign=top width="7%">&nbsp;</TD>
+    <TD vAlign=top width="7%"><FONT face=Arial size=2>.</FONT></TD>
+    <TD vAlign=top width="8%"><FONT face=Arial size=2>&nbsp;</FONT></TD>
+    <TD vAlign=top width="12%">&nbsp;</TD>
+    <TD vAlign=top width="12%">&nbsp;</TD>
+    <TD vAlign=top width="13%">&nbsp;</TD>
+    <TD vAlign=top width="14%">&nbsp;</TD></TR>
+  <TR>
+    <TD vAlign=top width="7%">&nbsp;</TD>
+    <TD vAlign=top width="12%">&nbsp;</TD>
+    <TD vAlign=top width="8%">&nbsp;</TD>
+    <TD vAlign=top width="7%">&nbsp;</TD>
+    <TD vAlign=top width="7%"><FONT face=Arial size=2>.</FONT></TD>
+    <TD vAlign=top width="8%"><FONT face=Arial size=2>&nbsp;</FONT></TD>
+    <TD vAlign=top width="12%"><FONT face=Arial size=2>+2.0</FONT></TD>
+    <TD vAlign=top width="12%"><FONT face=Arial size=2>+2.0</FONT></TD>
+    <TD vAlign=top width="13%"><FONT face=Arial size=2>+2.0</FONT></TD>
+    <TD vAlign=top width="14%"><FONT face=Arial size=2>+2.0</FONT></TD></TR>
+  <TR>
+    <TD vAlign=top width="7%"><FONT face=Arial size=2>&nbsp;</FONT></TD>
+    <TD vAlign=top width="12%">&nbsp;</TD>
+    <TD vAlign=top width="8%">&nbsp;</TD>
+    <TD vAlign=top width="7%">&nbsp;</TD>
+    <TD vAlign=top width="7%"><FONT face=Arial size=2>126</FONT></TD>
+    <TD vAlign=top width="8%"><FONT face=Arial size=2>&nbsp;</FONT></TD>
+    <TD vAlign=top width="12%"><FONT face=Arial size=2>xxx.yyy.252.0</FONT></TD>
+    <TD vAlign=top width="12%"><FONT face=Arial size=2>xxx.yyy.252.1</FONT></TD>
+    <TD vAlign=top width="13%"><FONT face=Arial 
+    size=2>xxx.yyy.253.254</FONT></TD>
+    <TD vAlign=top width="14%"><FONT face=Arial 
+    size=2>xxx.yyy.253.255</FONT></TD></TR>
+  <TR>
+    <TD vAlign=top width="7%"><FONT face=Arial size=2>&nbsp;</FONT></TD>
+    <TD vAlign=top width="12%">&nbsp;</TD>
+    <TD vAlign=top width="8%">&nbsp;</TD>
+    <TD vAlign=top width="7%">&nbsp;</TD>
+    <TD vAlign=top width="7%"><FONT face=Arial size=2>127*</FONT></TD>
+    <TD vAlign=top width="8%"><FONT face=Arial size=2>&nbsp;</FONT></TD>
+    <TD vAlign=top width="12%">&nbsp;</TD>
+    <TD vAlign=top width="12%">&nbsp;</TD>
+    <TD vAlign=top width="13%">&nbsp;</TD>
+    <TD vAlign=top width="14%">&nbsp;</TD></TR>
+  <TR>
+    <TD vAlign=top width="7%"><FONT face=Arial size=2>8</FONT></TD>
+    <TD vAlign=top width="12%"><FONT face=Arial size=2>255.255.255.0</FONT></TD>
+    <TD vAlign=top width="8%"><FONT face=Arial size=2>254</FONT></TD>
+    <TD vAlign=top width="7%"><FONT face=Arial size=2>254</FONT></TD>
+    <TD vAlign=top width="7%"><FONT face=Arial size=2>0*</FONT></TD>
+    <TD vAlign=top width="8%"><FONT face=Arial size=2>1.0</FONT></TD>
+    <TD vAlign=top width="12%"><FONT face=Arial size=2>&nbsp;</FONT></TD>
+    <TD vAlign=top width="12%">&nbsp;</TD>
+    <TD vAlign=top width="13%">&nbsp;</TD>
+    <TD vAlign=top width="14%">&nbsp;</TD></TR>
+  <TR>
+    <TD vAlign=top width="7%">&nbsp;</TD>
+    <TD vAlign=top width="12%">&nbsp;</TD>
+    <TD vAlign=top width="8%">&nbsp;</TD>
+    <TD vAlign=top width="7%">&nbsp;</TD>
+    <TD vAlign=top width="7%"><FONT face=Arial size=2>1</FONT></TD>
+    <TD vAlign=top width="8%"><FONT face=Arial size=2>&nbsp;</FONT></TD>
+    <TD vAlign=top width="12%"><FONT face=Arial size=2>xxx.yyy.1.0</FONT></TD>
+    <TD vAlign=top width="12%"><FONT face=Arial size=2>xxx.yyy.1.1</FONT></TD>
+    <TD vAlign=top width="13%"><FONT face=Arial size=2>xxx.yyy.1.254</FONT></TD>
+    <TD vAlign=top width="14%"><FONT face=Arial 
+  size=2>xxx.yyy.1.255</FONT></TD></TR>
+  <TR>
+    <TD vAlign=top width="7%"><FONT face=Arial size=2>&nbsp;</FONT></TD>
+    <TD vAlign=top width="12%">&nbsp;</TD>
+    <TD vAlign=top width="8%">&nbsp;</TD>
+    <TD vAlign=top width="7%">&nbsp;</TD>
+    <TD vAlign=top width="7%"><FONT face=Arial size=2>.</FONT></TD>
+    <TD vAlign=top width="8%"><FONT face=Arial size=2>&nbsp;</FONT></TD>
+    <TD vAlign=top width="12%">&nbsp;</TD>
+    <TD vAlign=top width="12%">&nbsp;</TD>
+    <TD vAlign=top width="13%">&nbsp;</TD>
+    <TD vAlign=top width="14%">&nbsp;</TD></TR>
+  <TR>
+    <TD vAlign=top width="7%">&nbsp;</TD>
+    <TD vAlign=top width="12%">&nbsp;</TD>
+    <TD vAlign=top width="8%">&nbsp;</TD>
+    <TD vAlign=top width="7%">&nbsp;</TD>
+    <TD vAlign=top width="7%"><FONT face=Arial size=2>.</FONT></TD>
+    <TD vAlign=top width="8%"><FONT face=Arial size=2>&nbsp;</FONT></TD>
+    <TD vAlign=top width="12%"><FONT face=Arial size=2>+1.0</FONT></TD>
+    <TD vAlign=top width="12%"><FONT face=Arial size=2>+1.0</FONT></TD>
+    <TD vAlign=top width="13%"><FONT face=Arial size=2>+1.0</FONT></TD>
+    <TD vAlign=top width="14%"><FONT face=Arial size=2>+1.0</FONT></TD></TR>
+  <TR>
+    <TD vAlign=top width="7%"><FONT face=Arial size=2>&nbsp;</FONT></TD>
+    <TD vAlign=top width="12%">&nbsp;</TD>
+    <TD vAlign=top width="8%">&nbsp;</TD>
+    <TD vAlign=top width="7%">&nbsp;</TD>
+    <TD vAlign=top width="7%"><FONT face=Arial size=2>.</FONT></TD>
+    <TD vAlign=top width="8%"><FONT face=Arial size=2>&nbsp;</FONT></TD>
+    <TD vAlign=top width="12%">&nbsp;</TD>
+    <TD vAlign=top width="12%">&nbsp;</TD>
+    <TD vAlign=top width="13%">&nbsp;</TD>
+    <TD vAlign=top width="14%">&nbsp;</TD></TR>
+  <TR>
+    <TD vAlign=top width="7%">&nbsp;</TD>
+    <TD vAlign=top width="12%">&nbsp;</TD>
+    <TD vAlign=top width="8%">&nbsp;</TD>
+    <TD vAlign=top width="7%">&nbsp;</TD>
+    <TD vAlign=top width="7%"><FONT face=Arial size=2>254</FONT></TD>
+    <TD vAlign=top width="8%"><FONT face=Arial size=2>&nbsp;</FONT></TD>
+    <TD vAlign=top width="12%"><FONT face=Arial size=2>xxx.yyy.254.0</FONT></TD>
+    <TD vAlign=top width="12%"><FONT face=Arial size=2>xxx.yyy.254.1</FONT></TD>
+    <TD vAlign=top width="13%"><FONT face=Arial 
+    size=2>xxx.yyy.254.254</FONT></TD>
+    <TD vAlign=top width="14%"><FONT face=Arial 
+    size=2>xxx.yyy.254.255</FONT></TD></TR>
+  <TR>
+    <TD vAlign=top width="7%"><FONT face=Arial size=2>&nbsp;</FONT></TD>
+    <TD vAlign=top width="12%">&nbsp;</TD>
+    <TD vAlign=top width="8%">&nbsp;</TD>
+    <TD vAlign=top width="7%">&nbsp;</TD>
+    <TD vAlign=top width="7%"><FONT face=Arial size=2>255*</FONT></TD>
+    <TD vAlign=top width="8%"><FONT face=Arial size=2>&nbsp;</FONT></TD>
+    <TD vAlign=top width="12%">&nbsp;</TD>
+    <TD vAlign=top width="12%">&nbsp;</TD>
+    <TD vAlign=top width="13%">&nbsp;</TD>
+    <TD vAlign=top width="14%">&nbsp;</TD></TR></TBODY></TABLE>
+<P><FONT face=Arial size=2>Ghi chú : Những giá tri XXX* là những giá trị có tất 
+cả các bit đều băng 0 có nghĩa đây là mạng con và bằng 1 để dùng nội bộ , thực 
+tế không phân .</FONT></P>
+<HR>
+
+<P align=center><FONT face="Times New Roman"><B><FONT color=#ff0000>PcLeHoan 
+1996 - 2002</FONT><FONT face=.VnTime size=2><BR></FONT></B></FONT><FONT 
+face="Times New Roman" size=2><B>Mirror </B>: <A 
+href="http://www.pclehoan.com/andi/ndc.htm">http://www.pclehoan.com/andi/ndc.htm</A><BR><B>Mirror 
+</B>: <A 
+href="http://www.lehoanpc.net/andi/ndc.htm">http://www.lehoanpc.net/andi/ndc.htm</A></FONT><BR><FONT 
+face="Times New Roman" size=2><B>Mirror </B>: <A 
+href="http://www.ktlehoan.com/">http://www.ktlehoan.com/</A></FONT></P>
+<P align=center><A 
+href="http://member.bcentral.com/cgi-bin/fc/fastcounter-login?2828564" 
+target=_top><IMG src="Cau truc IP 3_files/digits.gif" border=0></A> 
+</P></BODY></HTML>

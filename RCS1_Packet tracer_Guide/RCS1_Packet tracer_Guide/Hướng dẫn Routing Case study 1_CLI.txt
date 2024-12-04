@@ -1,0 +1,130 @@
+private address: 172.22.64.0/18 => chia địa chỉ mạng con cho các subnets thỏa yêu cầu
+
+Subnet 1: 40 hosts => cần 6 bit cho phần HostID => NetID là 26 bit hay một dải địa chỉ mạng /26
+
+	Subnet 1:	172.22.64.0/26 => không cấp 
+			172.22.64.1/26
+			...
+			172.22.64.62/26
+			172.22.64.63/26 => không cấp
+			/26 <=> Subnet Mask: 255.255.255.192
+Tương tự ta có:
+	Subnet 2: 	172.22.64.64/26 => không cấp
+			172.22.64.65/26
+			...
+			172.22.64.126/26
+			172.22.64.127/26 => không cấp
+			
+
+	Subnet 3: 	172.22.64.128/27 => không cấp
+			172.22.64.129/27
+			...
+			172.22.64.158/27
+			172.22.64.159/27 => không cấp
+			/27 <=> Subnet Mask: 255.255.255.224
+
+	Subnet 4: 	172.22.64.160/27 => không cấp
+			172.22.64.161/27
+			172.22.64.190/27
+			172.22.64.191/27 => không cấp
+
+	Subnet 5: 	172.22.64.192/30 => không cấp
+			172.22.64.193/30
+			172.22.64.194/30
+			172.22.64.195/30 => không cấp
+			/30 <=> Subnet Mask: 255.255.255.252
+
+	Subnet 6:	172.22.64.196/30 => không cấp
+			172.22.64.197/30
+			172.22.64.198/30
+			172.22.64.199/30 => không cấp
+
+Cấu hình:
+Tại router ISP:
+	- Yêu cầu cấu hình đường tĩnh/static route vào các mạng nối Ra, Rb, Rc
+	ip route 172.22.64.0 255.255.192.0 200.200.200.194
+Tại router Ra:
+	- Yêu cấu cấu hình đường mặc định/default route:
+	ip route 0.0.0.0 0.0.0.0 200.200.200.193
+	- Ra cần phải quảng bá đường default route cho Rb, Rc:
+	router rip
+		version 2
+		net ...
+		default-information originate
+Tại router Rb, Rc:
+	router rip
+		version 2
+		net ...
+
+!Cau hinh router ISP
+enable
+conf t
+hostname ISP
+int fa0/0
+	ip add 47.10.3.1 255.255.255.0
+	no shut
+int s0/0
+	ip add 200.200.200.193 255.255.255.252
+	clock rate 1000000
+	no shut
+ip route 172.22.64.0 255.255.192.0 200.200.200.194
+
+!Cau hinh router Ra
+enable
+conf t
+hostname Ra
+int fa0/0
+	ip add 172.22.64.1 255.255.255.192
+	no shut
+int s0/0
+	ip add 200.200.200.194 255.255.255.252
+	no shut
+int s0/1
+	ip add 172.22.64.193 255.255.255.252
+	clock rate 1000000
+	no shut
+ip route 0.0.0.0 0.0.0.0 200.200.200.193
+router rip
+	version 2
+	net 172.22.0.0
+	default-information originate
+
+!Cau hinh cho router Rb
+enable
+conf t
+hostname Rb
+int fa0/0
+	ip add 172.22.64.129 255.255.255.224
+	no shut
+int fa0/1
+	ip add 172.22.64.65 255.255.255.192
+	no shut
+int s0/1
+	ip add 172.22.64.194 255.255.255.252
+	no shut
+int s0/0
+	ip add 172.22.64.197 255.255.255.252
+	clock rate 1000000
+	no shut
+router rip
+	version 2
+	net 172.22.0.0
+
+!Cau hinh cho router Rc
+enable
+conf t
+hostname Rc
+int fa0/0
+	ip add 172.22.64.161 255.255.255.224
+	no shut
+int s0/0
+	ip add 172.22.64.198 255.255.255.252
+	no shut
+router rip
+	version 2
+	net 172.22.0.0
+
+
+
+
+ 

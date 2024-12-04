@@ -1,0 +1,31 @@
+!Cấu hình cho router RTA
+enable 
+conf t 
+hostname RTA
+int fa0/0
+	ip add 192.168.1.1 255.255.255.0
+	no shut
+int s0/0
+	ip add 192.168.2.1 255.255.255.0
+	clock rate 1000000
+	no shut
+router rip
+	version 2
+	net 192.168.1.0
+	net 192.168.2.0
+
+!Cấu hình cho router RTB
+enable
+conf t
+hostname RTB
+int fa0/0
+	ip add 192.168.3.1 255.255.255.0
+	no shut
+int s0/1
+	ip add 192.168.2.2 255.255.255.0
+	no shutdown
+router rip
+	version 2
+	network 192.168.2.0
+	network 192.168.3.0
+
